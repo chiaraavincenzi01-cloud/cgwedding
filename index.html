@@ -3,153 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chiara & Gregorio | Wedding Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <title>Chiara & Gregorio | Wedding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --salvia: #9db2a2;
             --perla: #fdfcf9;
-            --arancio-pastello: #f4b084;
-            --testo: #4a4a4a;
+            --arancio: #f4b084;
         }
 
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--perla); font-family: 'Montserrat', sans-serif; color: var(--testo); overflow-x: hidden; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--perla); font-family: 'Montserrat', sans-serif; }
 
-        /* --- BUSTA --- */
-        #envelope-wrapper {
+        /* --- BUSTA BLOCCATA IN PRIMO PIANO --- */
+        #copertura-busta {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #e2dfd5; z-index: 9999; display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            background: #e2dfd5; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
         }
 
-        .envelope {
-            position: relative; width: 90vw; max-width: 550px; height: 350px;
-            background: white; box-shadow: 0 40px 100px rgba(0,0,0,0.15); cursor: pointer;
+        .busta-grafica {
+            position: relative; width: 90%; max-width: 500px; height: 300px;
+            background: white; border: 1px solid #ddd; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
 
-        .envelope::before {
-            content: ""; position: absolute; top: 0; width: 0; height: 0;
-            border-top: 180px solid #f9f7f2; border-left: 275px solid transparent; border-right: 275px solid transparent;
-            z-index: 2; left: 0;
+        .sigillo {
+            position: absolute; top: 110px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 80px; background: var(--arancio);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-family: 'Cormorant Garamond'; font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 10;
         }
 
-        .wax-seal {
-            position: absolute; top: 150px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 80px; background: var(--arancio-pastello);
-            border-radius: 50%; z-index: 10; display: flex; align-items: center; justify-content: center;
-            color: white; font-family: 'Cormorant Garamond'; font-size: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        .wax-seal::after { content: "🌿"; position: absolute; bottom: -10px; font-size: 1.6rem; }
+        /* --- CONTENUTO DEL SITO (Invisibile all'inizio) --- */
+        #sito-reale { display: none; text-align: center; }
 
-        /* --- SITO --- */
-        #main-content { display: none; opacity: 0; text-align: center; }
-
-        /* HERO CON LA TUA IMMAGINE a.jpg.jpeg */
-        .hero {
-            width: 100%; height: 100vh;
+        .hero-villa {
+            width: 100%; height: 80vh;
             background: url('a.jpg.jpeg') no-repeat center center;
             background-size: cover; display: flex; align-items: flex-end; justify-content: center;
-            border-bottom: 10px solid white;
         }
 
         .hero-overlay {
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px);
-            padding: 40px; width: 80%; max-width: 600px; border: 1px solid var(--salvia); margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.9); padding: 40px;
+            width: 80%; max-width: 600px; border: 1px solid var(--salvia); margin-bottom: 30px;
         }
 
-        h1 { font-family: 'Cormorant Garamond'; font-size: 3.5rem; color: var(--salvia); margin: 0; }
-        h2 { font-family: 'Cormorant Garamond'; font-size: 2.5rem; color: var(--salvia); margin-bottom: 20px; }
+        .sezione { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
+        h1, h2 { font-family: 'Cormorant Garamond'; color: var(--salvia); margin: 0; }
+        h1 { font-size: 3rem; }
 
-        .countdown-container {
-            background: var(--salvia); color: white; padding: 30px; display: flex; justify-content: space-around;
-            max-width: 600px; margin: 40px auto; border: 1px solid white; outline: 3px solid var(--salvia); outline-offset: 5px;
-        }
-        .time-box span { display: block; font-size: 2.5rem; font-family: 'Cormorant Garamond'; }
-
-        .info-section { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
-        .btn-maps {
-            display: inline-block; padding: 15px 35px; background: var(--arancio-pastello);
-            color: white; text-decoration: none; margin-top: 20px; letter-spacing: 2px;
+        .bottone-mappa {
+            display: inline-block; padding: 15px 30px; background: var(--arancio);
+            color: white; text-decoration: none; margin-top: 15px; font-weight: bold;
         }
 
-        #yt-player { position: absolute; top: -999px; left: -999px; }
+        #youtube-invisibile { position: absolute; top: -9999px; left: -9999px; }
     </style>
 </head>
 <body>
 
-    <div id="envelope-wrapper" onclick="openWedding()">
-        <div class="envelope">
-            <div class="wax-seal">C & G</div>
+    <div id="copertura-busta" onclick="apriSito()">
+        <div class="busta-grafica">
+            <div class="sigillo">C & G</div>
+            <p style="position:absolute; bottom:20px; width:100%; text-align:center; color:#999; font-size:0.8rem;">Clicca per aprire</p>
         </div>
     </div>
 
-    <div id="yt-player">
-        <iframe id="video-frame" width="100" height="100" src="https://www.youtube.com/embed/vGJTaP6anOU?enablejsapi=1" frameborder="0"></iframe>
+    <div id="youtube-invisibile">
+        <iframe id="player-audio" width="100" height="100" 
+            src="https://www.youtube.com/embed/vGJTaP6anOU?enablejsapi=1" 
+            frameborder="0">
+        </iframe>
     </div>
 
-    <div id="main-content">
-        <div class="hero">
+    <div id="sito-reale">
+        <div class="hero-villa">
             <div class="hero-overlay">
                 <h1>Chiara & Gregorio</h1>
                 <p>03 OTTOBRE 2026</p>
             </div>
         </div>
 
-        <div class="countdown-container">
-            <div class="time-box"><span id="days">00</span>GIORNI</div>
-            <div class="time-box"><span id="hours">00</span>ORE</div>
-            <div class="time-box"><span id="minutes">00</span>MINUTI</div>
-        </div>
-
-        <div class="info-section">
+        <div class="sezione">
             <h2>La Cerimonia</h2>
             <p>Chiesa Parrocchiale dei Santi Gervasio e Protasio Martiri</p>
-            <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-            <a href="https://maps.google.com/?q=Chiesa+Santi+Gervasio+e+Protasio+Santrovaso" target="_blank" class="btn-maps">MAPPA CERIMONIA</a>
+            <p>Santrovaso di Preganziol (TV)</p>
+            <a href="https://maps.app.goo.gl/4XW9pXFpL9U2" target="_blank" class="bottone-mappa">VEDI MAPPA</a>
         </div>
 
-        <div class="info-section">
+        <div class="sezione" style="background: #fdfcf9;">
             <h2>Il Ricevimento</h2>
             <p>Villa Luppis</p>
-            <p>Via San Martino, 34 - 33087 Pasiano di Pordenone (PN)</p>
-            <a href="https://maps.google.com/?q=Villa+Luppis+Pasiano+di+Pordenone" target="_blank" class="btn-maps">MAPPA RICEVIMENTO</a>
+            <p>Pasiano di Pordenone (PN)</p>
+            <a href="https://maps.app.goo.gl/7Y5p9" target="_blank" class="bottone-mappa">VEDI MAPPA</a>
         </div>
 
-        <div style="background: #f4f6f4; padding: 40px; border: 1px dashed var(--salvia); margin: 40px auto; max-width: 500px;">
-            <h3>Lista Nozze</h3>
+        <div class="sezione" style="background: #f4f6f4; border: 1px dashed var(--salvia);">
+            <h2>Un Pensiero per noi</h2>
             <p>IBAN: IT 00 X 00000 00000 000000000000</p>
             <p>Intestato a Chiara e Gregorio</p>
         </div>
     </div>
 
     <script>
-        function openWedding() {
-            // Nasconde la busta
-            document.getElementById('envelope-wrapper').style.opacity = '0';
-            setTimeout(() => { document.getElementById('envelope-wrapper').style.visibility = 'hidden'; }, 800);
+        function apriSito() {
+            // 1. ELIMINA LA BUSTA
+            document.getElementById('copertura-busta').style.display = 'none';
             
-            // Start Musica
-            var iframe = document.getElementById('video-frame');
+            // 2. MOSTRA IL SITO
+            document.getElementById('sito-reale').style.display = 'block';
+            
+            // 3. FAI PARTIRE LA MUSICA
+            var iframe = document.getElementById('player-audio');
             iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-
-            // Mostra Sito
-            document.getElementById('main-content').style.display = 'block';
-            setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 100);
-            
-            startCountdown();
-        }
-
-        function startCountdown() {
-            const target = new Date("October 3, 2026 11:00:00").getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const d = target - now;
-                document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            }, 1000);
         }
     </script>
+
 </body>
 </html>
