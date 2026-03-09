@@ -1,191 +1,300 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Chiara & Gregorio</title>
-<style>
-body{
-margin:0;
-font-family:'Georgia', serif;
-overflow:hidden;
-text-align:center;
-background: url('https://cdn.pixabay.com/photo/2017/12/03/18/21/villa-2997905_1280.jpg') no-repeat center center fixed;
-background-size: cover;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiara & Gregorio | Wedding Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #c5a059;
+            --cream: #fcfaf7;
+            --text: #4a4a4a;
+            --overlay: rgba(255, 255, 255, 0.85);
+        }
 
-/* Busta */
-#envelope{
-position:absolute;
-top:100%;
-left:100%;
-transform:translate(-80%,-80%);
-width:380px;
-height:250px;
-background:#f8f6f0;
-border-radius:10px;
-box-shadow:0 15px 40px rgba(0,0,0,0.25);
-cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-transition: all 1s ease;
-z-index:10;
-}
-#seal{
-width:90px;
-height:90px;
-background:#f4a261;
-border-radius:80%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-font-weight:bold;
-font-size:28px;
-box-shadow:0 6px 15px rgba(0,0,0,0.4);
-}
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            overflow-x: hidden;
+            background: #fdfbfb;
+        }
 
-/* Invito */
-#invito{
-display:none;
-padding:50px;
-background: rgba(255,255,255,0.85);
-border-radius:15px;
-margin:50px auto;
-width:80%;
-max-width:700px;
-z-index:5;
-}
-h1{ font-size:50px; color:#7a4b3a; margin:0; }
-h2{ font-weight:normal; color:#a67c52; margin:5px 0 20px 0; }
-p{ font-size:20px; line-height:1.6; }
+        /* Sfondo con Overlay */
+        .hero-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://cdn.pixabay.com/photo/2017/12/03/18/21/villa-2997905_1280.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            filter: brightness(0.9);
+        }
 
-/* Petali */
-.petal{
-position:fixed;
-top:-20px;
-width:12px;
-height:12px;
-border-radius:50%;
-opacity:0.85;
-background:#f4a261;
-animation:fall linear infinite;
-}
-@keyframes fall{
-0%{top:-20px;}
-100%{top:110vh;}
-}
+        /* Container Busta */
+        .envelope-wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            transition: opacity 1s ease, transform 1.5s ease;
+        }
 
-/* Uccellini */
-.bird{
-position:fixed;
-width:40px;
-height:40px;
-background: url('https://cdn.pixabay.com/photo/2017/01/31/18/19/bird-2022607_1280.png') no-repeat;
-background-size:contain;
-animation:fly linear infinite;
-}
-@keyframes fly{ 0%{left:-50px;} 100%{left:110vw;} }
+        #envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #e0d8c3;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: 0.5s;
+        }
 
-/* RSVP */
-#rsvp{
-margin-top:30px;
-padding:20px;
-display:none;
-}
-#rsvp input, #rsvp textarea{
-width:80%;
-padding:10px;
-margin:5px 0;
-border-radius:5px;
-}
-#rsvp button{
-padding:10px 20px;
-background:#f4a261;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
+        #envelope:before {
+            content: "";
+            position: absolute;
+            top: 0; z-index: 2;
+            border-top: 130px solid #f3ecd9;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            transform-origin: top;
+            transition: transform 0.4s 0.4s;
+        }
 
-/* Countdown */
-#countdown{ font-size:20px; margin-top:10px; color:#7a4b3a; }
-</style>
+        .seal {
+            position: absolute;
+            top: 110px; left: 50%;
+            transform: translateX(-50%);
+            width: 60px; height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.5s;
+        }
+
+        /* Stato Aperto */
+        .envelope-wrapper.open #envelope:before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+        .envelope-wrapper.open {
+            transform: translateY(-120%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Foglio Invito */
+        #invito {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.5s ease;
+            max-width: 700px;
+            margin: 50px auto;
+            background: var(--overlay);
+            backdrop-filter: blur(10px);
+            padding: 60px 40px;
+            border-radius: 2px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.4);
+            display: none;
+        }
+
+        #invito.show {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: 2px;
+            color: #2c2c2c;
+        }
+
+        .ampersand {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2rem;
+            color: var(--gold);
+            margin: 10px 0;
+        }
+
+        .details {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin: 30px 0;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding: 20px 0;
+        }
+
+        #countdown {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        /* Form RSVP */
+        .rsvp-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #a38545;
+            letter-spacing: 4px;
+        }
+
+        /* Petali raffinati */
+        .petal {
+            position: fixed;
+            background: #fff0f0;
+            border-radius: 150% 0 150% 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Busta -->
-<div id="envelope" onclick="openInvite()"><div id="seal">C&G</div></div>
+<div class="hero-bg"></div>
 
-<!-- Musica -->
 <audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a0c6a9c4.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a0c6a9c4.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Invito -->
+<div class="envelope-wrapper" id="wrapper">
+    <div id="envelope" onclick="openInvite()">
+        <div class="seal">C & G</div>
+    </div>
+</div>
+
 <div id="invito">
-<h1>Chiara Vincenzi</h1>
-<h2>&</h2>
-<h1>Gregorio Tronchin</h1>
-<p>3 Ottobre 2026, Ore 11:00</p>
-<p>Chiesa Parrocchiale dei Santi Gervasio e Protasio Martiri</p>
-<p>Villa Luppis, Pordenone</p>
-<div id="countdown"></div>
+    <p style="letter-spacing: 5px; font-size: 0.8rem;">SI SPOSANO</p>
+    <h1>Chiara Vincenzi</h1>
+    <div class="ampersand">&</div>
+    <h1>Gregorio Tronchin</h1>
+    
+    <div class="details">
+        3 Ottobre 2026 • Ore 11:00 <br>
+        Chiesa Parrocchiale dei Santi Gervasio e Protasio Martiri <br>
+        Villa Luppis, Pordenone
+    </div>
 
-<div id="rsvp">
-<h2>Conferma presenza</h2>
-<input type="text" id="nome" placeholder="Nome e Cognome">
-<input type="text" id="partecipanti" placeholder="Numero persone">
-<textarea id="allergie" placeholder="Segnala allergie"></textarea>
-<button onclick="submitRSVP()">Invia</button>
-<p id="thanks"></p>
-</div>
-</div>
+    <div id="countdown">Caricamento countdown...</div>
 
-<!-- Uccellini -->
-<div class="bird" style="top:20%; animation-duration:25s;"></div>
-<div class="bird" style="top:50%; animation-duration:30s;"></div>
+    <div class="rsvp-section" id="rsvp-box">
+        <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">R.S.V.P.</h3>
+        <p>Saremmo onorati di avervi con noi.</p>
+        <input type="text" id="nome" placeholder="Nome e Cognome">
+        <input type="number" id="partecipanti" placeholder="Numero di ospiti">
+        <textarea id="allergie" rows="3" placeholder="Intolleranze o note particolari"></textarea>
+        <button onclick="submitRSVP()">Conferma la presenza</button>
+        <p id="thanks" style="display:none; color: var(--gold); font-weight: bold;"></p>
+    </div>
+</div>
 
 <script>
 function openInvite(){
-document.getElementById("envelope").style.display="none";
-document.getElementById("invito").style.display="block";
-document.getElementById("rsvp").style.display="block";
-document.getElementById("music").play();
-createPetals();
-startCountdown();
+    const wrapper = document.getElementById("wrapper");
+    const invito = document.getElementById("invito");
+    
+    // Animazione apertura
+    wrapper.classList.add("open");
+    document.getElementById("music").play();
+
+    setTimeout(() => {
+        wrapper.style.display = "none";
+        invito.style.display = "block";
+        setTimeout(() => invito.classList.add("show"), 100);
+        createPetals();
+        startCountdown();
+    }, 1200);
 }
+
 function createPetals(){
-for(let i=0;i<50;i++){
-let p=document.createElement("div");
-p.className="petal";
-p.style.left=Math.random()*100+"vw";
-p.style.animationDuration=(3+Math.random()*4)+"s";
-document.body.appendChild(p);
+    for(let i=0; i<30; i++){
+        let p = document.createElement("div");
+        p.className = "petal";
+        let size = Math.random() * 15 + 10 + "px";
+        p.style.width = size;
+        p.style.height = size;
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.opacity = Math.random();
+        p.style.animation = `fall ${Math.random() * 5 + 5}s linear infinite`;
+        p.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(p);
+    }
 }
-}
-function submitRSVP(){
-let n=document.getElementById("nome").value;
-let np=document.getElementById("partecipanti").value;
-let a=document.getElementById("allergie").value;
-if(n && np){
-document.getElementById("thanks").innerText="Grazie "+n+"! Conferma ricevuta.";
-document.getElementById("rsvp").style.display="none";
-console.log({n,np,a});
-} else alert("Inserisci nome e numero di persone");
-}
+
 function startCountdown(){
-let countDate=new Date("Oct 3, 2026 11:00:00").getTime();
-setInterval(()=>{
-let now=new Date().getTime();
-let d=countDate-now;
-let days=Math.floor(d/(1000*60*60*24));
-let h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-let m=Math.floor((d%(1000*60*60))/(1000*60));
-let s=Math.floor((d%(1000*60))/1000);
-document.getElementById("countdown").innerText=`Manca ${days} giorni ${h} ore ${m} minuti ${s} secondi`;
-},1000);
+    const target = new Date("October 3, 2026 11:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = target - now;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById("countdown").innerHTML = `Mancano ${d} giorni, ${h} ore e ${m}:${s.toString().padStart(2, '0')} minuti`;
+    }, 1000);
+}
+
+function submitRSVP(){
+    let n = document.getElementById("nome").value;
+    if(n){
+        document.getElementById("rsvp-box").innerHTML = `<h3>Grazie ${n}!</h3><p>La vostra conferma è stata inviata con successo.</p>`;
+    } else {
+        alert("Per favore, inserisci almeno il tuo nome.");
+    }
 }
 </script>
+
 </body>
 </html>
