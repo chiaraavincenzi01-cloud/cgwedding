@@ -1,16 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<title>Il nostro matrimonio</title>
+<meta charset="UTF-8">
+<title>Chiara & Gregorio</title>
+
+<style>
+
+body{
+margin:0;
+font-family: "Georgia", serif;
+background:#fdfaf6;
+overflow:hidden;
+text-align:center;
+}
+
+/* BUSTA */
+
+#envelope{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:320px;
+height:220px;
+background:#f8f6f2;
+border-radius:6px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+cursor:pointer;
+}
+
+#seal{
+position:absolute;
+top:90px;
+left:50%;
+transform:translateX(-50%);
+width:70px;
+height:70px;
+background:#f4a261;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+color:white;
+font-size:20px;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* INVITO */
+
+#invite{
+display:none;
+padding:40px;
+animation:fade 2s;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* PETALI */
+
+.petal{
+position:fixed;
+top:-20px;
+width:10px;
+height:10px;
+border-radius:50%;
+opacity:0.8;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+h1{
+font-size:40px;
+margin-top:30px;
+}
+
+.details{
+font-size:20px;
+margin-top:20px;
+}
+
+</style>
 </head>
 
-<body style="text-align:center;font-family:Arial">
+<body>
+
+<!-- BUSTA -->
+
+<div id="envelope" onclick="openInvite()">
+<div id="seal">C&G</div>
+</div>
+
+<!-- MUSICA -->
+
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- INVITO -->
+
+<div id="invite">
 
 <h1>Chiara & Gregorio</h1>
 
-<p>Ci sposiamo il 3 ottobre 2026</p>
+<p class="details">
+Con grande gioia vi invitiamo al nostro matrimonio
+</p>
 
-<p>Benvenuti al nostro sito di matrimonio 💍</p>
+<p class="details">
+3 Ottobre 2026<br>
+Ore 11:00
+</p>
+
+<p class="details">
+Chiesa Parrocchiale dei<br>
+Santi Gervasio e Protasio Martiri<br>
+Santrovaso di Preganziol
+</p>
+
+<p class="details">
+Dopo la cerimonia<br>
+festeggeremo insieme presso<br>
+Villa Luppis – Pordenone
+</p>
+
+</div>
+
+<script>
+
+function openInvite(){
+
+document.getElementById("envelope").style.display="none";
+
+document.getElementById("invite").style.display="block";
+
+document.getElementById("music").play();
+
+startPetals();
+}
+
+function startPetals(){
+
+for(let i=0;i<40;i++){
+
+let petal=document.createElement("div");
+
+petal.classList.add("petal");
+
+let colors=["#f4a261","#ffffff","#9caf88"];
+
+petal.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+petal.style.left=Math.random()*100+"vw";
+
+petal.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(petal);
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
