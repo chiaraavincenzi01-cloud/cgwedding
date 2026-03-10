@@ -11,7 +11,7 @@
             --perla: #fdfcf9;
             --salvia-bright: #b1c9b6;
             --salvia-deep: #5d7062;
-            --arancio-lux: #f7bd96; /* Arancione Pastello */
+            --arancio-lux: #f7bd96;
             --oro-linea: #d4af37;
             --text: #333333;
         }
@@ -41,7 +41,6 @@
         .left { width: 50%; clip-path: polygon(0 0, 0 100%, 100% 50%); z-index: 6; background: #f9f9f9; }
         .right { right: 0; width: 50%; clip-path: polygon(100% 0, 100% 100%, 0 50%); z-index: 6; background: #f9f9f9; }
         
-        /* CERALACCA CON FONT REGALE */
         .wax { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             width: 120px; height: 120px; background: var(--arancio-lux); 
@@ -49,10 +48,7 @@
             cursor: pointer; z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.5s; 
         }
         .wax span { 
-            color: white; 
-            font-size: 2.2rem; 
-            font-family: 'Great Vibes', cursive; /* Font regale richiesto */
-            letter-spacing: 1px; 
+            color: white; font-size: 2.2rem; font-family: 'Great Vibes', cursive; letter-spacing: 1px; 
         }
 
         .aperta .top { transform: rotateX(110deg); opacity: 0; }
@@ -62,7 +58,7 @@
         .aperta .wax { transform: translate(-50%, -50%) scale(0); opacity: 0; }
         .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.5s; pointer-events: none; }
 
-        /* HERO SECTION */
+        /* HERO SECTION CON TRANSIZIONE DELICATA */
         .hero { 
             height: 100vh; 
             display: flex; 
@@ -74,32 +70,39 @@
         }
         .hero-img { 
             position: absolute; 
-            width: 100%; 
-            height: 100%; 
+            width: 110%; /* Più larga per permettere il movimento */
+            height: 110%; 
             background: url("a.jpg.jpeg") center/cover no-repeat; 
             z-index: 0;
+            animation: kenBurns 20s infinite alternate ease-in-out;
+            opacity: 0.85; /* Effetto trasparenza richiesto */
         }
+        
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-2%, -2%); }
+        }
+
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.3); 
+            background: rgba(255, 252, 249, 0.4); /* Velo molto leggero e caldo */
             z-index: 1;
         }
         .hero-text { 
             z-index: 2; 
             padding: 40px;
-            background: rgba(255, 255, 255, 0.7); 
-            backdrop-filter: blur(5px);
-            border: 2px solid var(--arancio-lux); /* Richiamo arancio */
-        }
-        .hero-text h1 { 
-            font-family: 'Great Vibes', cursive; 
-            font-size: 5rem; 
-            color: var(--salvia-deep); 
-            margin: 10px 0; 
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--arancio-lux);
+            animation: fadeInText 3s ease-out;
         }
 
-        /* SEZIONE COLORE ARANCIO (NOVITÀ) */
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         .welcome-note {
             background-color: var(--arancio-lux);
             color: white;
@@ -117,12 +120,7 @@
         
         .bg-salvia { background-color: var(--salvia-bright); color: white; }
         .bg-perla { background-color: transparent; }
-        
-        .linea-oro { 
-            width: 150px; height: 1px; 
-            background: linear-gradient(to right, transparent, var(--oro-linea), transparent); 
-            margin: 20px auto; 
-        }
+        .linea-oro { width: 150px; height: 1px; background: linear-gradient(to right, transparent, var(--oro-linea), transparent); margin: 20px auto; }
 
         /* COUNTDOWN */
         .count-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 700px; margin: 40px auto; }
@@ -131,38 +129,29 @@
 
         /* CARDS */
         .info-card { 
-            background: white; 
-            color: var(--text); 
-            padding: 50px 30px; 
-            border: 1px solid #ececec;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.03); 
-            position: relative;
+            background: white; color: var(--text); padding: 50px 30px; border: 1px solid #ececec;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.03); position: relative;
         }
         .info-card::before {
             content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid var(--arancio-lux); opacity: 0.4; pointer-events: none;
+            border: 1px solid var(--arancio-lux); opacity: 0.3; pointer-events: none;
         }
 
-        .map-container { 
-            height: 400px; 
-            margin-top: 30px; 
-            border: 1px solid #eee;
-        }
+        .map-container { height: 400px; margin-top: 30px; border: 1px solid #eee; }
 
         /* GALLERY */
         .masonry { column-count: 3; column-gap: 15px; margin-top: 50px; }
         .masonry img { width: 100%; margin-bottom: 15px; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; }
 
         /* STORIA */
-        .section-storia { background: rgba(247, 189, 150, 0.15); line-height: 1.8; } /* Sfondo arancio chiarissimo */
-        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #444; }
+        .section-storia { background: rgba(247, 189, 150, 0.1); line-height: 1.8; }
+        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: #444; }
         .storia-decor { text-align: center; font-size: 2rem; color: var(--arancio-lux); margin: 30px 0; }
 
         /* RSVP */
         .btn-lux { 
-            background: var(--salvia-deep); color: white; padding: 18px; border: none; 
-            width: 100%; letter-spacing: 3px; cursor: pointer; transition: 0.4s; text-transform: uppercase; 
-            font-weight: 600;
+            background: var(--salvia-deep); color: white; padding: 18px; border: none; width: 100%; 
+            letter-spacing: 3px; cursor: pointer; transition: 0.4s; text-transform: uppercase; font-weight: 600;
         }
         .btn-lux:hover { background: var(--arancio-lux); }
 
@@ -189,14 +178,14 @@
 
 <audio id="audio" loop><source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3" type="audio/mpeg"></audio>
 
-<div id="main-content" style="visibility: hidden; opacity: 0; transition: 2s;">
+<div id="main-content" style="visibility: hidden; opacity: 0; transition: 2.5s ease-in-out;">
     
     <section class="hero">
         <div class="hero-img"></div>
         <div class="hero-overlay"></div>
         <div class="hero-text">
             <p>Sabato, 03 Ottobre 2026</p>
-            <h1>Chiara & Gregorio</h1>
+            <h1 style="font-family: 'Great Vibes'; font-size: 5rem; color: var(--salvia-deep);">Chiara & Gregorio</h1>
             <div class="linea-oro"></div>
             <p style="font-style: italic; text-transform: none; letter-spacing: 1px;">"Un cordone a tre capi non si rompe tanto presto."<br>Ecclesiaste 4,12</p>
         </div>
@@ -227,7 +216,7 @@
                 <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.4419637775586!2d12.2359418!3d45.7222409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47793664d4c5c767%3A0x6a0f4d360f959c1b!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Sant&#39;Urbano%20TV!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.2223456789!2d12.2355!3d45.6028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4779354000000001%3A0x0!2zNDXCsDM2JzEwLjAiTiAxMsKwMTQnMDAuMCJF!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -242,7 +231,7 @@
                 <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.681144464157!2d12.6133299!3d45.8576403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4779606138676a6b%3A0x280e817d23f7903d!2sVia%20S.%20Martino%2C%2034%2C%2033087%20Pasiano%20di%20Pordenone%20PN!5e0!3m2!1sit!2sit!4v1700000000001" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.454238714041!2d12.617467612269553!3d45.8222409740523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796395b2737609%3A0xc02388e6e5e8e88e!2sVia%20S.%20Martino%2C%2034%2C%2033087%20Pasiano%20di%20Pordenone%20PN!5e0!3m2!1sit!2sit!4v1709123456789" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -262,12 +251,12 @@
 
     <section class="bg-perla">
         <div class="container">
-            <div class="info-card" style="border-color: var(--arancio-lux); background-color: #fff9f5;">
+            <div class="info-card" style="border-color: var(--arancio-lux); background-color: #fffaf7;">
                 <h2>Wedding Wishlist</h2>
                 <p>La vostra presenza è per noi il dono più prezioso. Se desiderate aiutarci a costruire il nostro futuro e la nostra casa, potete farlo qui:</p>
                 <div style="background: white; padding: 30px; border: 1px dashed var(--arancio-lux); margin-top: 20px;">
                     <p><strong>INTESTATO A:</strong><br>Chiara Vincenzi & Gregorio Tronchin</p>
-                    <div style="font-weight: 500; letter-spacing: 2px; color: var(--salvia-deep); margin: 15px 0; font-size: 1.2rem;">IT 00 X 00000 00000 000000000000</div>
+                    <div style="font-weight: 500; letter-spacing: 2px; color: var(--salvia-deep); margin: 15px 0; font-size: 1.1rem;">IT 00 X 00000 00000 000000000000</div>
                     <p style="font-size: 0.8rem; opacity: 0.7;">Grazie di cuore per condividere con noi questo inizio</p>
                 </div>
             </div>
@@ -304,7 +293,7 @@ Gregorio, non appena vide Chiara alla festa, fu folgorato: Non riusciva a distog
 Con una grande audacia, Gregorio riuscì a procurarsi il suo numero di telefono dal gruppo whatsapp creato per l’occasione. Nei giorni successivi, il suo cuore batteva all'impazzata all'idea di scriverle, ma la timidezza lo paralizzava. 
 Avrebbe mai trovato il coraggio di esprimere i suoi sentimenti? E lei come avrebbe reagito? infondo avevano solo tredici anni.</p>
                 <p>Dopo una lunga battaglia interiore decise di buttarsi, scrivendole un timido “Ehi”. Da lì si scambiarono qualche messaggio, ma la loro chat non decollava. 
-Chiara fu lusingata da quelle sue attenzioni ma ben presto l'imbarazzo prese il sopravvento. Le sue risposte, sempre più monosillabiche, fecero sì che la conversazione si affievolisse gradualmente, fino a spegnersi del tutto lasciando un vuoto incolmabile tra di loro. </p>
+Chiara fue lusingata da quelle sue attenzioni ma ben presto l'imbarazzo prese il sopravvento. Le sue risposte, sempre più monosillabiche, fecero sì che la conversazione si affievolisse gradualmente, fino a spegnersi del tutto lasciando un vuoto incolmabile tra di loro. </p>
                 <p>Sembrava che dopo quella esperienza si fossero persi totalmente ma, il filo invisibile che li legava, un giorno, li fece ricongiungere: si ritrovarono proprio lo stesso anno a condividere nuovamente gli spazi della loro piccola comunità, in un incontro completamente inaspettato.</p>
                 <p>Tutto iniziò con un messaggio misterioso che sbucò dal cellulare di Chiara. Questo sms, spedito da un numero sconosciuto, l'aveva invitata a presentarsi in piazza a un'ora precisa, senza specificare il motivo: “Ciao, ci vediamo con tutti gli altri in piazza il giorno X alle ore X”.
 Impossibilitata a rispondere al messaggio per chiedere chiarimenti a causa del suo piano tariffario, decise di seguire l’invito per capire di cosa si trattasse, accompagnata dal papà Alessandro.
