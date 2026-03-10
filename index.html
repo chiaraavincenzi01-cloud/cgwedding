@@ -12,6 +12,7 @@
             --salvia-deep: #7a8f80;
             --perla: #fdfcf9;
             --arancio-pastello: #f4b084;
+            --oro-ghirigori: rgba(212, 175, 55, 0.3);
             --testo: #4a4a4a;
             --transition: all 1.5s cubic-bezier(0.7, 0, 0.3, 1);
         }
@@ -24,7 +25,6 @@
             background: #e5e2d9; z-index: 10000; display: flex; justify-content: center; align-items: center;
             transition: var(--transition);
         }
-
         .envelope { position: relative; width: 100%; height: 100%; background: #f9f7f2; }
         .flap { position: absolute; width: 100%; height: 100%; background: #fdfcf9; transition: var(--transition); z-index: 5; }
         .flap.top { top: 0; left: 0; height: 55%; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; }
@@ -39,15 +39,13 @@
         }
         .wax-seal::after { content: "🌿"; position: absolute; top: -10px; right: -5px; font-size: 2.5rem; }
         .wax-seal span { font-size: 1.8rem; color: white; font-weight: bold; }
-
         .aperta#busta-container { transform: translateY(-100%); }
 
         /* --- SITO --- */
         #sito-reale { opacity: 0; transition: opacity 2s ease; }
         
-        /* Immagine Hero Vedo-non-Vedo */
         .hero {
-            height: 80vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 70vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
             position: relative; overflow: hidden; background: white;
         }
         .hero-img {
@@ -60,135 +58,32 @@
         .nomi { font-family: 'Pinyon Script', cursive; font-size: 5rem; color: var(--salvia-deep); margin: 20px 0; }
         .data-nozze { font-size: 1.4rem; letter-spacing: 3px; font-weight: 300; }
 
-        /* SEZIONE COUNTDOWN DEDICATA */
-        .countdown-section { padding: 60px 20px; text-align: center; background: var(--perla); }
+        /* --- SEZIONE COUNTDOWN (Basso immagine, prima della cerimonia) --- */
+        .countdown-section { padding: 50px 20px; text-align: center; background: var(--perla); }
         .countdown-container {
             background: var(--salvia); border: 1px solid var(--arancio-pastello);
-            max-width: 600px; margin: 0 auto; padding: 40px 20px;
+            max-width: 650px; margin: 0 auto; padding: 30px 10px;
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
         }
-        .count-box span { display: block; font-size: 2.8rem; font-weight: 300; color: var(--arancio-pastello); font-family: 'Cormorant Garamond'; }
-        .count-box label { font-family: 'Montserrat'; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: white; }
+        .count-box span { display: block; font-size: 2.5rem; font-weight: 300; color: var(--arancio-pastello); font-family: 'Cormorant Garamond'; }
+        .count-box label { font-family: 'Montserrat'; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: white; }
 
-        /* SEZIONI INFO */
-        .sezione { padding: 80px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
-        h2 { font-family: 'Cormorant Garamond'; font-size: 2.8rem; font-weight: 300; color: var(--salvia-deep); }
-        .mappa-box { height: 350px; margin: 30px 0; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-
-        .btn-regal { background: var(--salvia-deep); color: white; padding: 18px 50px; border: none; font-family: 'Montserrat'; letter-spacing: 2px; cursor: pointer; margin-top: 20px; }
-        .iban-card { border: 1px dashed var(--arancio-pastello); padding: 40px; background: white; margin: 40px 0; }
-    </style>
-</head>
-<body>
-
-    <div id="busta-container" onclick="apriBusta()">
-        <div class="envelope">
-            <div class="flap top"></div><div class="flap bottom"></div>
-            <div class="flap left"></div><div class="flap right"></div>
-            <div class="wax-seal"><span>C & G</span></div>
-        </div>
-    </div>
-
-    <audio id="audioNozze" loop><source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3" type="audio/mpeg"></audio>
-
-    <div id="sito-reale">
-        <section class="hero">
-            <div class="hero-img"></div>
-            <div class="hero-content">
-                <p class="benvenuti">BENVENUTI<br>sul sito del nostro matrimonio</p>
-                <div class="nomi">Chiara & Gregorio</div>
-                <p class="data-nozze">03 . 10 . 2026</p>
-            </div>
-        </section>
-
-        <section class="countdown-section">
-            <h3 style="font-weight: 300; letter-spacing: 3px; margin-bottom: 30px; font-size: 0.9rem; text-transform: uppercase;">Il sogno ha inizio tra:</h3>
-            <div class="countdown-container">
-                <div class="count-box"><span id="days">00</span><label>Giorni</label></div>
-                <div class="count-box"><span id="hours">00</span><label>Ore</label></div>
-                <div class="count-box"><span id="minutes">00</span><label>Minuti</label></div>
-                <div class="count-box"><span id="seconds">00</span><label>Secondi</label></div>
-            </div>
-        </section>
-
-        <section class="sezione">
-            <h2>La Cerimonia</h2>
-            <p>Chiesa dei Santi Gervasio e Protasio Martiri</p>
-            <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-            <div class="mappa-box">
-                <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.7441864149!2d12.2272!3d45.605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477936630f699991%3A0x66f68e983226786!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Sant'Antonino%20TV!5e0!3m2!1sit!2sit!4v1700000000000"></iframe>
-            </div>
-        </section>
-
-        <section class="sezione" style="background: #f9fbf9;">
-            <h2>Il Ricevimento</h2>
-            <p>Villa Luppis</p>
-            <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
-            <div class="mappa-box">
-                <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.8767!2d12.6324!3d45.8504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796f7c35555555%3A0x8888888888888888!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1700000000000"></iframe>
-            </div>
-        </section>
-
-        <section class="sezione">
-            <div class="iban-card">
-                <p style="font-size: 1.1rem; line-height: 1.8;">Per noi il regalo più grande è la vostra presenza,<br>ma se volete contribuire al nostro futuro, di seguito l'IBAN:</p>
-                <p style="font-size: 1.3rem; letter-spacing: 2px; color: var(--salvia-deep); margin-top: 20px;">IT 00 X 00000 00000 000000000000</p>
-            </div>
-        </section>
-
-        <section class="sezione">
-            <div style="background: white; padding: 60px 20px; border: 1px solid var(--salvia);">
-                <h2 style="font-size: 2.2rem;">R.S.V.P.</h2>
-                <div style="max-width: 500px; margin: 30px auto; text-align: left;">
-                    <div style="margin-bottom: 20px;">
-                        <label style="font-family: 'Montserrat'; font-size: 0.7rem; font-weight: 600;">NOME E COGNOME</label>
-                        <input type="text" style="width: 100%; border:none; border-bottom: 1px solid #ddd; padding: 10px 0;">
-                    </div>
-                    <div>
-                        <label style="font-family: 'Montserrat'; font-size: 0.7rem; font-weight: 600;">INTOLLERANZE</label>
-                        <textarea style="width: 100%; border:none; border-bottom: 1px solid #ddd; padding: 10px 0;"></textarea>
-                    </div>
-                    <button class="btn-regal" style="width: 100%;">CONFERMA</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        function apriBusta() {
-            document.getElementById('busta-container').classList.add('aperta');
-            document.getElementById('audioNozze').play();
-            setTimeout(() => {
-                document.getElementById('sito-reale').style.opacity = '1';
-                startCountdown();
-            }, 1000);
+        /* --- GALLERIA D'AMORE (Sfondo Arancio e Ghirigori Oro) --- */
+        .gallery-section {
+            background-color: var(--arancio-pastello);
+            background-image: url("https://www.transparenttextures.com/patterns/floral-paper.png"); /* Effetto ghirigori */
+            padding: 80px 0; overflow: hidden; position: relative;
+            border-top: 1px solid var(--oro-ghirigori); border-bottom: 1px solid var(--oro-ghirigori);
         }
+        .gallery-title { font-family: 'Pinyon Script', cursive; font-size: 4rem; color: white; text-align: center; margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        
+        .slider { display: flex; width: calc(250px * 10); animation: scroll 30s linear infinite; }
+        .slider:hover { animation-play-state: paused; }
+        .slide { width: 230px; height: 300px; margin: 0 15px; flex-shrink: 0; border: 10px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: rotate(-2deg); transition: 0.5s; }
+        .slide:nth-child(even) { transform: rotate(3deg); }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
 
-        function startCountdown() {
-            // Target: 3 Ottobre 2026 alle ore 11:00
-            const targetDate = new Date("October 3, 2026 11:00:00").getTime();
-
-            const interval = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("days").innerText = days.toString().padStart(2, '0');
-                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-
-                if (distance < 0) {
-                    clearInterval(interval);
-                    document.querySelector(".countdown-container").innerHTML = "<p style='color:white; grid-column: 1/5;'>OGGI È IL GRANDE GIORNO!</p>";
-                }
-            }, 1000);
-        }
-    </script>
-</body>
-</html>
+        @keyframes scroll { 
+            0% {
