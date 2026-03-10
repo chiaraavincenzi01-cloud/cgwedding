@@ -2,30 +2,99 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chiara & Gregorio | 03.10.2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --salvia: #9db2a2;
-            --perla: #fdfcf9;
-            --arancio: #f4b084;
-            --testo: #4a4a4a;
+            --oro-regale: #d4af37;
+            --crema-luminoso: #fffdfa;
+            --arancio-ceralacca: #f4b084;
+            --ombra-realistica: rgba(0, 0, 0, 0.15);
         }
 
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--perla); font-family: 'Montserrat', sans-serif; color: var(--testo); overflow-x: hidden; }
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background: #f0ede5; font-family: 'Cormorant Garamond', serif;
+            overflow: hidden;
+        }
 
-        /* --- BUSTA --- */
-        #copertura-busta {
+        /* --- CONTENITORE FULL SCREEN --- */
+        #wrapper-invito {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #e2dfd5; z-index: 9999; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; perspective: 1500px;
+            background: radial-gradient(circle, #fdfcf9 0%, #e2dfd5 100%);
+            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
         }
-        .envelope { position: relative; width: 90%; max-width: 550px; height: 350px; background: white; box-shadow: 0 40px 100px rgba(0,0,0,0.15); }
-        .envelope::before { content: ""; position: absolute; top: 0; width: 0; height: 0; border-top: 180px solid #f9f7f2; border-left: 275px solid transparent; border-right: 275px solid transparent; z-index: 2; left: 0; }
-        .sigillo { position: absolute; top: 150px; left: 50%; transform: translateX(-50%); width: 85px; height: 85px; background: var(--arancio); border-radius: 50%; z-index: 10; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Cormorant Garamond'; font-size: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-        .sigillo::after { content: "🌿"; position: absolute; bottom: -10px; font-size: 1.6rem; }
+
+        /* --- LA BUSTA --- */
+        .envelope {
+            position: relative;
+            width: 100vw; height: 100vh; /* Full screen */
+            background: var(--crema-luminoso);
+            display: flex; justify-content: center; align-items: center;
+            /* Texture ghirigori impressa */
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png"), 
+                              linear-gradient(45deg, rgba(212, 175, 55, 0.03) 25%, transparent 25%);
+            background-size: auto, 100px 100px;
+        }
+
+        /* --- LEMBO SUPERIORE (FLAP) --- */
+        .flap {
+            position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+            background: #f9f7f2;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            z-index: 3;
+            transform-origin: top;
+            transition: transform 0.8s ease-in-out;
+            box-shadow: 0 10px 20px var(--ombra-realistica);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* --- CERALACCA REALISTICA --- */
+        .wax-seal {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            background: var(--arancio-ceralacca);
+            border-radius: 50%;
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3), 
+                        3px 8px 15px var(--ombra-realistica);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(0,0,0,0.05);
+        }
+
+        .wax-seal:hover { transform: translate(-50%, -55%) scale(1.05); }
+
+        .initials {
+            color: rgba(255,255,255,0.8);
+            font-size: 2rem;
+            font-weight: 600;
+            text-shadow: -1px -1px 1px rgba(0,0,0,0.2), 1px 1px 1px rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
+
+        /* --- ANIMAZIONE APERTURA --- */
+        .aperta .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .aperta .wax-seal {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .aperta#wrapper-invito {
+            transform: translateY(-100%);
+        }
 
         /* --- SITO --- */
         #sito-reale { display: none; opacity: 0; transition: opacity 2s; text-align: center; }
