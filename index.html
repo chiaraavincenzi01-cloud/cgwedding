@@ -4,143 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chiara & Gregorio | 03.10.2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&family=Montserrat:wght@100;300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --oro-regale: #d4af37;
-            --crema-luminoso: #fffdfa;
+            --oro: #c5a059;
+            --salvia: #8ba091;
+            --crema: #fffdfa;
             --arancio-ceralacca: #f4b084;
-            --ombra-realistica: rgba(0, 0, 0, 0.15);
+            --testo: #4a4a4a;
+            --transizione: all 1.2s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #f0ede5; font-family: 'Cormorant Garamond', serif;
-            overflow: hidden;
+            background: #f8f6f2; font-family: 'Montserrat', sans-serif;
+            color: var(--testo); overflow-x: hidden;
         }
 
-        /* --- CONTENITORE FULL SCREEN --- */
-        #wrapper-invito {
+        /* --- BUSTA FULL SCREEN ESPERIENZIALE --- */
+        #container-busta {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 9999; perspective: 1500px;
+            z-index: 10000; display: flex; justify-content: center; align-items: center;
             background: radial-gradient(circle, #fdfcf9 0%, #e2dfd5 100%);
-            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+            transition: var(--transizione);
+            perspective: 2000px;
         }
 
-        /* --- LA BUSTA --- */
-        .envelope {
-            position: relative;
-            width: 100vw; height: 100vh; /* Full screen */
-            background: var(--crema-luminoso);
+        .envelope-wrapper {
+            position: relative; width: 100%; height: 100%;
+            background: #fdfcf9;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.05);
+            overflow: hidden;
             display: flex; justify-content: center; align-items: center;
-            /* Texture ghirigori impressa */
-            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png"), 
-                              linear-gradient(45deg, rgba(212, 175, 55, 0.03) 25%, transparent 25%);
-            background-size: auto, 100px 100px;
         }
 
-        /* --- LEMBO SUPERIORE (FLAP) --- */
-        .flap {
+        /* Texture Carta Pregiata con Ghirigori */
+        .envelope-wrapper::after {
+            content: ""; position: absolute; width: 100%; height: 100%;
+            opacity: 0.1; pointer-events: none;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        }
+
+        /* Lembi della Busta */
+        .flap-top {
             position: absolute; top: 0; left: 0; width: 100%; height: 50%;
-            background: #f9f7f2;
+            background: #fcfaf5; z-index: 5;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-            z-index: 3;
             transform-origin: top;
-            transition: transform 0.8s ease-in-out;
-            box-shadow: 0 10px 20px var(--ombra-realistica);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 1s ease-in-out;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        /* --- CERALACCA REALISTICA --- */
+        .side-flaps {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+            background: #fffdfa; z-index: 4;
+            clip-path: polygon(0 100%, 100% 100%, 50% 0);
+        }
+
+        /* CERALACCA REALISTICA CON ULIVO */
         .wax-seal {
-            position: absolute;
-            top: 50%; left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px; height: 100px;
+            width: 120px; height: 120px; z-index: 10;
+            cursor: pointer; transition: all 0.5s ease;
+        }
+
+        .wax-shape {
+            width: 100%; height: 100%;
             background: var(--arancio-ceralacca);
-            border-radius: 50%;
-            z-index: 10;
+            border-radius: 54% 46% 62% 38% / 41% 59% 41% 59%; /* Forma irregolare sciolta */
+            box-shadow: inset -4px -4px 8px rgba(0,0,0,0.3), 3px 10px 20px rgba(0,0,0,0.2);
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3), 
-                        3px 8px 15px var(--ombra-realistica);
-            transition: all 0.4s ease;
-            border: 2px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
-        .wax-seal:hover { transform: translate(-50%, -55%) scale(1.05); }
+        .wax-shape::before { /* L'ulivo che spunta */
+            content: "🌿"; position: absolute; top: -15px; right: -5px;
+            font-size: 2.5rem; transform: rotate(15deg); filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+        }
 
-        .initials {
-            color: rgba(255,255,255,0.8);
-            font-size: 2rem;
-            font-weight: 600;
-            text-shadow: -1px -1px 1px rgba(0,0,0,0.2), 1px 1px 1px rgba(255,255,255,0.3);
+        .initials-embossed {
+            font-family: 'Cormorant Garamond'; font-size: 1.8rem; font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            text-shadow: -1px -1px 0px rgba(0,0,0,0.2), 1px 1px 0px rgba(255,255,255,0.2);
             letter-spacing: 2px;
-            pointer-events: none;
         }
 
-        /* --- ANIMAZIONE APERTURA --- */
-        .aperta .flap {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
+        /* APERTURA */
+        .open .flap-top { transform: rotateX(180deg); z-index: 1; }
+        .open .wax-seal { opacity: 0; transform: translate(-50%, -100%) scale(0.5); pointer-events: none; }
+        .open#container-busta { transform: translateY(-100%); }
 
-        .aperta .wax-seal {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .aperta#wrapper-invito {
-            transform: translateY(-100%);
-        }
-
-        /* --- SITO --- */
-        #sito-reale { display: none; opacity: 0; transition: opacity 2s; text-align: center; }
+        /* --- SITO REALE - DESIGN REGALE --- */
+        #sito-reale { visibility: hidden; opacity: 0; transition: opacity 1.5s ease; }
 
         .hero {
-            width: 100%; height: 100vh;
-            background: url('a.jpg.jpeg') no-repeat center center;
-            background-size: cover; display: flex; align-items: flex-end; justify-content: center;
-            border-bottom: 10px solid white;
+            position: relative; width: 100%; height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('a.jpg.jpeg') center/cover no-repeat;
+            display: flex; align-items: center; justify-content: center;
         }
-        .hero-overlay { background: rgba(255, 255, 255, 0.9); padding: 40px; width: 80%; max-width: 600px; border: 1px solid var(--salvia); margin-bottom: 50px; }
 
-        h1, h2, h3 { font-family: 'Cormorant Garamond'; color: var(--salvia); margin: 0; }
-        h1 { font-size: 3.5rem; }
-        h2 { font-size: 2.5rem; margin-bottom: 20px; }
-
-        /* --- COUNTDOWN REGALE --- */
-        .countdown-regal {
-            background: var(--salvia); color: white; padding: 40px 20px;
-            display: flex; justify-content: space-around; max-width: 700px;
-            margin: 60px auto; border: 1px solid white; outline: 3px solid var(--salvia); outline-offset: 8px;
+        .hero-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px; text-align: center;
+            border: 1px solid var(--oro);
+            outline: 10px solid rgba(255,255,255,0.5); outline-offset: -20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            max-width: 500px; width: 85%;
         }
-        .time-box span { display: block; font-size: 3.2rem; font-family: 'Cormorant Garamond'; font-weight: 300; }
-        .time-box label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.9; }
 
-        /* --- SEZIONI INFO & MAPPE --- */
-        .sezione { padding: 80px 20px; max-width: 900px; margin: 0 auto; }
-        .mappa-box { width: 100%; height: 300px; margin-top: 30px; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .mappa-box iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.2); }
+        .names { font-family: 'Pinyon Script', cursive; font-size: 4rem; color: var(--oro); margin: 20px 0; }
+        .date-top { letter-spacing: 5px; font-weight: 300; font-size: 0.9rem; border-bottom: 1px solid var(--oro); display: inline-block; padding-bottom: 10px; }
 
-        /* --- RSVP FORM --- */
-        .rsvp-container { background: #f4f6f4; border: 1px solid var(--salvia); padding: 50px 30px; margin: 60px auto; max-width: 600px; }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 8px; color: var(--salvia); font-weight: bold; }
-        input, textarea { width: 100%; padding: 15px; border: 1px solid #ccc; box-sizing: border-box; font-family: 'Montserrat'; }
-        .btn-send { background: var(--salvia); color: white; border: none; padding: 18px; width: 100%; cursor: pointer; letter-spacing: 3px; font-weight: bold; transition: 0.3s; }
-        .btn-send:hover { background: #8ba091; }
+        /* SEZIONI A COLORI ALTERNATI E PROSPETTIVE */
+        .sezione-gold { background: #fdfaf2; padding: 100px 20px; }
+        .sezione-salvia { background: var(--salvia); color: white; padding: 100px 20px; }
+        
+        .box-info {
+            max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center;
+        }
 
-        .btn-mappa { display: inline-block; padding: 12px 25px; background: var(--arancio); color: white; text-decoration: none; margin-top: 15px; font-size: 0.8rem; letter-spacing: 2px; }
+        @media (max-width: 768px) { .box-info { grid-template-columns: 1fr; } .names { font-size: 3rem; } }
+
+        .titolo-regale { font-family: 'Cormorant Garamond'; font-size: 3rem; font-weight: 300; margin-bottom: 15px; }
+        .salvia-text { color: var(--salvia); }
+        .white-text { color: white; }
+
+        .mappa-pregiata {
+            border: 15px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1); height: 350px;
+        }
+
+        /* COUNTDOWN */
+        .countdown-container {
+            display: flex; justify-content: center; gap: 20px; margin: 40px 0;
+        }
+        .time-circle {
+            width: 80px; height: 80px; border: 1px solid var(--oro); border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .time-circle span { font-size: 1.5rem; font-weight: 600; }
+        .time-circle label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
+
     </style>
 </head>
 <body>
 
-    <div id="copertura-busta" onclick="apriMatrimonio()">
-        <div class="envelope">
-            <div class="sigillo">C & G</div>
+    <div id="container-busta" onclick="apriInvito()">
+        <div class="envelope-wrapper">
+            <div class="flap-top"></div>
+            <div class="side-flaps"></div>
+            
+            <div class="wax-seal">
+                <div class="wax-shape">
+                    <span class="initials-embossed">C & G</span>
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 10%; letter-spacing: 5px; font-size: 0.7rem; color: var(--oro); z-index: 10;">
+                TOCCA PER RICEVERE L'ANNUNCIO
+            </div>
         </div>
     </div>
 
@@ -149,76 +173,72 @@
     </audio>
 
     <div id="sito-reale">
-        <div class="hero">
-            <div class="hero-overlay">
-                <p style="letter-spacing: 8px; font-size: 0.8rem; margin-bottom: 10px;">SI SPOSANO</p>
-                <h1>Chiara & Gregorio</h1>
-                <p style="margin-top: 10px; font-style: italic;">03 Ottobre 2026</p>
+        <section class="hero">
+            <div class="hero-card">
+                <span class="date-top">03 OTTOBRE 2026</span>
+                <div class="names">Chiara & Gregorio</div>
+                <p style="font-family: 'Cormorant Garamond'; font-size: 1.2rem; font-style: italic;">Si promettono amore eterno</p>
+                
+                <div class="countdown-container">
+                    <div class="time-circle"> <span id="days">00</span> <label>Gg</label> </div>
+                    <div class="time-circle"> <span id="hours">00</span> <label>Ore</label> </div>
+                    <div class="time-circle"> <span id="minutes">00</span> <label>Min</label> </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="countdown-regal">
-            <div class="time-box"><span id="days">00</span><label>Giorni</label></div>
-            <div class="time-box"><span id="hours">00</span><label>Ore</label></div>
-            <div class="time-box"><span id="minutes">00</span><label>Minuti</label></div>
-            <div class="time-box"><span id="seconds">00</span><label>Secondi</label></div>
-        </div>
-
-        <div class="sezione">
-            <h2>La Cerimonia</h2>
-            <p>Ore 11:00 - Chiesa Parrocchiale dei Santi Gervasio e Protasio</p>
-            <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-            <div class="mappa-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.2464730693583!2d12.2355556!3d45.6056944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47793570959b1585%3A0x6436662e08722b5e!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Preganziol%20TV!5e0!3m2!1sit!2sit!4v1700000000000"></iframe>
+        <section class="sezione-gold">
+            <div class="box-info">
+                <div>
+                    <h2 class="titolo-regale salvia-text">La Cerimonia</h2>
+                    <p><b>Ore 11:00</b></p>
+                    <p>Chiesa Parrocchiale dei Santi Gervasio e Protasio</p>
+                    <p>Santrovaso di Preganziol (TV)</p>
+                </div>
+                <div class="mappa-pregiata">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.6262963162793!2d12.235558176840656!3d45.60335042450849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477949363351f787%3A0x86134b2239d5e30c!2sSanti%20Gervasio%20e%20Protasio!5e0!3m2!1sit!2sit!4v1709999999999" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
-            <a href="https://maps.app.goo.gl/uXv7VjM6Y2p7L6Z7" target="_blank" class="btn-mappa">INDICAZIONI STRADALI</a>
-        </div>
+        </section>
 
-        <div class="sezione" style="background: white;">
-            <h2>Il Ricevimento</h2>
-            <p>Dalle ore 13:00 - Villa Luppis</p>
-            <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
-            <div class="mappa-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.468233373752!2d12.63737031238977!3d45.82193560935574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796677f240294b%3A0xe78190757c91a383!2sHotel%20Villa%20Luppis!5e0!3m2!1sit!2sit!4v1710008888888"></iframe>
+        <section class="sezione-salvia">
+            <div class="box-info" style="direction: rtl;">
+                <div style="direction: ltr;">
+                    <h2 class="titolo-regale white-text">Il Ricevimento</h2>
+                    <p><b>Dalle ore 13:00</b></p>
+                    <p>Villa Luppis</p>
+                    <p>Pasiano di Pordenone (PN)</p>
+                    <p style="margin-top: 20px; font-style: italic;">Un'antica dimora storica, immersa in un parco secolare, farà da cornice al nostro giorno più bello.</p>
+                </div>
+                <div class="mappa-pregiata" style="direction: ltr;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.861783307616!2d12.637537376846922!3d45.83354397576566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796f600f769269%3A0xb30907409249e088!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1709999999999" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
-            <a href="https://maps.app.goo.gl/YmKzGgYwYwYwYw" target="_blank" class="btn-mappa">INDICAZIONI STRADALI</a>
-        </div>
+        </section>
 
-        <div class="sezione" style="padding-top: 0;">
-            <div style="background: #fdfcf9; border: 1px dashed var(--salvia); padding: 40px;">
-                <h3>La vostra presenza è per noi il dono più prezioso. Se volete contribuire al nostro futuro, un piccolo aiuto sarà un grande gesto d'amore</h3>
-                <p>IBAN: IT 00 X 00000 00000 000000000000</p>
-                <p>Intestato a Chiara Vincenzi e Gregorio Tronchin</p>
+        <section class="sezione-gold" style="text-align: center;">
+            <h2 class="titolo-regale salvia-text">R.S.V.P.</h2>
+            <p>Conferma la tua presenza entro il 30 Agosto 2026</p>
+            <div style="margin-top: 30px;">
+                <button onclick="window.location.href='#'" style="background: var(--salvia); color: white; border: none; padding: 15px 40px; font-family: 'Montserrat'; letter-spacing: 2px; cursor: pointer;">CONFERMA ORA</button>
             </div>
-        </div>
-
-        <div class="rsvp-container">
-            <h2>R.S.V.P.</h2>
-            <p style="margin-bottom: 30px; font-size: 0.9rem;">Si prega di confermare entro il 30 Agosto 2026</p>
-            
-            <div class="form-group">
-                <label>NOME E COGNOME PARTECIPANTE/I</label>
-                <input type="text" id="rsvp-name" placeholder="es. Chiara e Gregorio">
-            </div>
-            
-            <div class="form-group">
-                <label>INTOLLERANZE O ALLERGIE ALIMENTARI</label>
-                <textarea id="rsvp-notes" rows="3" placeholder="Indica qui eventuali esigenze (Celiachia, Vegan, etc.)"></textarea>
-            </div>
-
-            <button class="btn-send" onclick="sendRSVP()">INVIA CONFERMA</button>
-        </div>
-        
-        <p style="padding-bottom: 50px; font-size: 0.7rem; letter-spacing: 2px;">VI ASPETTIAMO CON GIOIA</p>
+        </section>
     </div>
 
     <script>
-        function apriMatrimonio() {
-            document.getElementById('copertura-busta').style.transform = 'translateY(-100%)';
-            var audio = document.getElementById('audioNozze');
-            audio.play();
-            document.getElementById('sito-reale').style.display = 'block';
-            setTimeout(() => { document.getElementById('sito-reale').style.opacity = '1'; }, 100);
+        function apriInvito() {
+            // Animazione Busta
+            document.getElementById('container-busta').classList.add('open');
+            
+            // Audio
+            const audio = document.getElementById('audioNozze');
+            audio.play().catch(e => console.log("Audio play blocked by browser"));
+
+            // Mostra Sito
+            const sito = document.getElementById('sito-reale');
+            sito.style.visibility = 'visible';
+            setTimeout(() => { sito.style.opacity = '1'; }, 800);
+            
             startCountdown();
         }
 
@@ -230,14 +250,7 @@
                 document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
                 document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('seconds').innerText = Math.floor((d % (1000 * 60)) / 1000);
             }, 1000);
-        }
-
-        function sendRSVP() {
-            const nome = document.getElementById('rsvp-name').value;
-            if(nome === "") { alert("Per favore, inserisci il tuo nome."); return; }
-            alert("Grazie " + nome + "! La tua conferma è stata inviata con successo.");
         }
     </script>
 </body>
