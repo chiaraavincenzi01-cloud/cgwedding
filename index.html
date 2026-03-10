@@ -9,9 +9,9 @@
     <style>
         :root {
             --perla: #fdfcf9;
-            --salvia-bright: #b1c9b6;
+            --salvia-bright: #b1c9b6; /* Più luminoso */
             --salvia-deep: #5d7062;
-            --arancio-lux: #f7bd96;
+            --arancio-lux: #f7bd96; /* Più visibile */
             --oro-linea: #d4af37;
             --text: #333333;
         }
@@ -35,7 +35,7 @@
         #busta-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #e0ddd5; display: flex; justify-content: center; align-items: center;
-            z-index: 9999; perspective: 2000px; transition: 1.5s;
+            z-index: 9999; perspective: 2000px;
         }
         .envelope { width: 100%; height: 100%; position: relative; background: #fdfcf9; }
         .flap { position: absolute; width: 100%; height: 100%; background: #ffffff; transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1); z-index: 5; box-shadow: inset 0 0 50px rgba(0,0,0,0.05); }
@@ -51,7 +51,7 @@
         .aperta .left { transform: translateX(-100%); opacity: 0; }
         .aperta .right { transform: translateX(100%); opacity: 0; }
         .aperta .wax { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        .aperta#busta-container { visibility: hidden; opacity: 0; pointer-events: none; }
+        .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.5s; pointer-events: none; }
 
         /* SEZIONI */
         section { padding: 120px 20px; width: 100%; position: relative; }
@@ -64,17 +64,19 @@
         .hero-text h1 { font-family: 'Pinyon Script'; font-size: 6.5rem; color: var(--salvia-deep); margin: 20px 0; }
         .hero-text p { letter-spacing: 10px; font-weight: 300; text-transform: uppercase; font-size: 0.9rem; }
 
-        /* STILI COMUNI */
+        /* BOX COLORATI */
         .bg-salvia { background-color: var(--salvia-bright); color: white; }
         .bg-arancio { background-color: var(--arancio-lux); color: white; }
         .bg-perla { background-color: var(--perla); color: var(--text); }
+
         h2 { font-family: 'Cormorant Garamond'; font-size: 3.5rem; font-weight: 300; margin-bottom: 40px; }
         .linea-oro { width: 80px; height: 1px; background: var(--oro-linea); margin: 20px auto; }
 
-        /* LA NOSTRA STORIA */
-        .section-storia { padding: 100px 20px; background: #fff; line-height: 1.8; }
-        .storia-content { max-width: 800px; margin: 0 auto; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: #555; }
+        /* LA NOSTRA STORIA - INTEGRATA */
+        .section-storia { padding: 100px 20px; background: #fff; line-height: 2; }
+        .storia-content { max-width: 850px; margin: 0 auto; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #444; }
         .storia-decor { font-size: 2rem; color: var(--oro-linea); margin: 30px 0; }
+        .storia-content p { margin-bottom: 25px; }
 
         /* COUNTDOWN */
         .count-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 800px; margin: 40px auto; }
@@ -86,9 +88,11 @@
         .masonry { column-count: 3; column-gap: 15px; }
         .masonry img { width: 100%; margin-bottom: 15px; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
-        /* INFO BOXES & FORM */
+        /* INFO BOXES */
         .info-card { background: white; color: var(--text); padding: 50px; border: 1px solid var(--oro-linea); margin-bottom: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
         .map { height: 400px; border: 5px solid white; margin-top: 30px; }
+
+        /* RSVP */
         .rsvp-form { max-width: 600px; margin: auto; padding: 40px; background: rgba(255,255,255,0.9); }
         input, textarea { width: 100%; padding: 15px; margin-bottom: 25px; border: none; border-bottom: 1px solid var(--salvia-bright); background: transparent; font-family: 'Montserrat'; font-size: 1rem; outline: none; }
         .btn-lux { background: var(--salvia-deep); color: white; padding: 20px 40px; border: none; width: 100%; letter-spacing: 5px; cursor: pointer; font-size: 0.9rem; transition: 0.4s; }
@@ -98,6 +102,7 @@
             .hero-text h1 { font-size: 4rem; }
             .count-grid { grid-template-columns: repeat(2, 1fr); }
             .masonry { column-count: 1; }
+            .storia-content { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -123,11 +128,9 @@
     <a href="#rsvp">RSVP</a>
 </div>
 
-<audio id="audio" loop>
-    <source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3" type="audio/mpeg">
-</audio>
+<audio id="audio" loop><source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3" type="audio/mpeg"></audio>
 
-<div id="main-content" style="display: none; opacity: 0; transition: 1.5s;">
+<div id="main-content" style="visibility: hidden;">
    
     <section class="hero">
         <div class="hero-img"></div>
@@ -144,15 +147,15 @@
             <div class="storia-decor">~ ❦ ~</div>
             <p>C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita.</p>
             
-            <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita in un intrico di parentele che li legava come rami di un unico albero: Nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
+            <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita in un intrico di parentele che li legava come rami di un unico albero: nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
             
-            <p>Abitando nello stesso piccolo paese, sin da piccoli, i due frequentarono la stessa classe della scuola materna dove emersero subito le loro personalità: Lei, una bambina delicata dagli occhi grandi e brillanti, amava la tranquillità... Lui invece, era un piccolo uragano di energia, sempre pronto a nuove avventure.</p>
-
-            <p>Nonostante le differenze, nessuno dimenticò che durante il momento della “bella lavanderina” lui, con un sorriso sbarazzino, preferiva offrire il suo bacino a Chiara che rideva divertita.</p>
-
-            <p>Dopo anni di lontananza, un messaggio arrivato per "errore" (o forse per destino) li fece rincontrare in piazza a Santrovaso per il post-cresima. Un sorteggio casuale li mise nello stesso gruppo, e da lì, settimana dopo settimana, iniziarono a conoscersi davvero.</p>
-
-            <p>Oggi, quel desiderio espresso alla vista di una stella cadente prende vita, solido e tangibile. Dio è stato la loro stella polare, guidandoli verso la luce della propria vocazione: Chiara Vincenzi per lui e Gregorio Tronchin per lei.</p>
+            <p>Abitando nello stesso piccolo paese, sin da piccoli, i due frequentarono la stessa classe della scuola materna dove emersero subito le loro personalità: Lei, una bambina delicata dagli occhi grandi e brillanti, amava la tranquillità e trascorreva ore all'aperto, raccogliendo pigne e legnetti per dare vita a piccole creature fantastiche. Lui invece, era un piccolo uragano di energia, sempre pronto a nuove avventure e a coinvolgere tutti i suoi amici in frenetiche partite a pallone.</p>
+            
+            <p>Terminato l’asilo, il tempo passò inesorabile. Elementari e medie li avevano allontanati, fino a quando il loro destino si incrociò di nuovo al compleanno di un’amica. Gregorio ne fu folgorato. Seguirono timidi messaggi, ma fu solo più tardi, grazie a un misterioso SMS inviato per errore al numero di Chiara, che i due si ritrovarono casualmente in piazza per l'inizio del percorso post-cresima.</p>
+            
+            <p>Il sorteggio dei gruppi, del tutto casuale, li fece finire nello stesso team. Settimana dopo settimana, Chiara e Gregorio ebbero modo di conoscersi a fondo, scoprendo un'affinità rara. Negli anni hanno costruito un amore autentico, migliorandosi a vicenda e affrontando insieme ogni sfida.</p>
+            
+            <p>Oggi, quel desiderio espresso alla vista di una stella cadente prende vita. Dio è stato la loro stella polare, guidandoli verso la luce della propria vocazione: <strong>Chiara Vincenzi</strong> per lui e <strong>Gregorio Tronchin</strong> per lei.</p>
             <div class="storia-decor">~ ❦ ~</div>
         </div>
     </section>
@@ -178,7 +181,7 @@
                 <p><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
                 <p>Santrovaso di Preganziol (TV)</p>
                 <div class="map">
-                    <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.656555135111!2d12.246416!3d45.617499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDM3JzAzLjAiTiAxMsKwMTQnNDcuMSJF!5e0!3m2!1sit!2sit!4v1600000000000"></iframe>
+                    <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.833!2d12.2356!3d45.6033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDM2JzExLjkiTiAxMsKwMTQnMDguMiJF!5e0!3m2!1sit!2sit!4v1620000000000"></iframe>
                 </div>
             </div>
         </div>
@@ -192,7 +195,7 @@
                 <p><strong>Villa Luppis</strong></p>
                 <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map">
-                    <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2778.68!2d12.63!3d45.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDUxJzAwLjAiTiAxMsKwMzcnNDguMCJF!5e0!3m2!1sit!2sit!4v1600000000000"></iframe>
+                    <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.123!2d12.6345!3d45.8542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDUxJzE1LjEiTiAxMsKwMzgnMDQuMiJF!5e0!3m2!1sit!2sit!4v1620000000000"></iframe>
                 </div>
             </div>
         </div>
@@ -203,12 +206,12 @@
             <h2>Momenti Insieme</h2>
             <div class="linea-oro"></div>
             <div class="masonry">
-                <img src="foto1.jpg" alt="Noi">
-                <img src="foto2.jpg" alt="Noi">
-                <img src="foto3.jpg" alt="Noi">
-                <img src="foto4.jpg" alt="Noi">
-                <img src="foto5.jpg" alt="Noi">
-                <img src="foto6.jpg" alt="Noi">
+                <img src="foto1.jpg">
+                <img src="foto2.jpg">
+                <img src="foto3.jpg">
+                <img src="foto4.jpg">
+                <img src="foto5.jpg">
+                <img src="foto6.jpg">
             </div>
         </div>
     </section>
@@ -236,18 +239,19 @@
 
 <script>
     function openWedding() {
+        // Animazione busta
         document.getElementById("busta-container").classList.add("aperta");
+        
+        // Play Audio
         const audio = document.getElementById("audio");
-        audio.play().catch(e => console.log("Audio play blocked"));
+        audio.play().catch(e => console.log("Audio play blocked by browser."));
        
+        // Mostra contenuto con delay per far finire l'animazione della busta
         setTimeout(() => {
             const main = document.getElementById("main-content");
-            main.style.display = "block";
-            setTimeout(() => {
-                main.style.opacity = "1";
-                document.getElementById("nav").classList.add("visible");
-                startTimer();
-            }, 50);
+            main.style.visibility = "visible";
+            document.getElementById("nav").classList.add("visible");
+            startTimer();
         }, 1100);
     }
 
