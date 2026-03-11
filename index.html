@@ -47,7 +47,7 @@
         }
         #music-control svg { width: 20px; fill: var(--salvia-deep); }
 
-        /* BUSTA ESTERNA - FULL SCREEN */
+        /* BUSTA ESTERNA - EXTRA LARGE */
         #busta-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -57,23 +57,29 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center; overflow: hidden;
         }
-        .envelope-img { width: 100%; height: 100%; object-fit: cover; }
+        .envelope-img { 
+            width: 120%; height: 120%; /* Ingrandita ulteriormente */
+            object-fit: cover; 
+            filter: brightness(1.02);
+        }
         .wax-img { 
             position: absolute; top: 50%; left: 50%; 
             transform: translate(-50%, -50%); 
-            width: 195px; height: auto; cursor: pointer; 
-            z-index: 20; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.18));
+            width: 210px; height: auto; cursor: pointer; 
+            z-index: 20; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2));
             transition: transform 0.5s ease;
         }
+        .wax-img:hover { transform: translate(-50%, -50%) scale(1.05); }
         
         .hint-text {
-            position: absolute; bottom: 10%;
-            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.1rem;
+            position: absolute; bottom: 15%;
+            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.2rem;
             color: var(--salvia-deep); letter-spacing: 1px;
-            animation: pulse 2.5s infinite ease-in-out; text-align: center;
+            animation: breathe 3s infinite ease-in-out; /* Effetto scompare-ricompare */
+            text-align: center;
             z-index: 21; width: 100%;
         }
-        @keyframes pulse { 0%, 100% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-5px); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.8; } }
 
         #busta-container.svanito { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -140,7 +146,7 @@
             border-top: 1px solid var(--perla);
         }
 
-        /* SLIDER FOTO - SCORRIMENTO AUTOMATICO + MANUALE */
+        /* SLIDER FOTO - SCORRIMENTO AUTOMATICO */
         .slider-wrapper { 
             overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; 
             padding: 20px 0; cursor: grab;
@@ -195,7 +201,7 @@
         <img src="busta.png" class="envelope-img">
         <img src="bollino.png" class="wax-img" onclick="openWedding()">
     </div>
-    <div class="hint-text">Premi sul bollino per scoprire il contenuto</div>
+    <div class="hint-text">clicca sulla cera lacca per scoprire il contenuto</div>
 </div>
 
 <audio id="audio" loop><source src="alex-productions-musica-romantica-per-matrimoni-e-san-valentino-amore(chosic.com).mp3" type="audio/mpeg"></audio>
@@ -373,7 +379,7 @@
 
     function openWedding() {
         document.getElementById("busta-container").classList.add("svanito");
-        audio.play().catch(e => { console.log("Interazione richiesta") });
+        audio.play().catch(e => { console.log("Audio blocked") });
         musicWrapper.style.display = "flex";
         setTimeout(() => {
             const main = document.getElementById("main-content");
@@ -396,7 +402,7 @@
         }
     }
 
-    // Gestione Slider: stop animazione al tocco, ripresa al rilascio
+    // Slider controls
     const wrapper = document.querySelector('.slider-wrapper');
     wrapper.addEventListener('touchstart', () => track.style.animationPlayState = 'paused');
     wrapper.addEventListener('touchend', () => track.style.animationPlayState = 'running');
