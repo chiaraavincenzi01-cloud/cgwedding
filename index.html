@@ -30,11 +30,19 @@
         }
 
         /* --- AUDIO CONTROL --- */
-        #music-control {
+        #music-wrapper {
             position: fixed; top: 20px; right: 20px; z-index: 10001;
+            display: none; align-items: center; gap: 10px;
+        }
+        .music-label {
+            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 0.8rem;
+            color: var(--salvia-deep); background: var(--glass); padding: 5px 10px;
+            border-radius: 15px; border: 0.5px solid var(--oro-caldo);
+        }
+        #music-control {
             background: var(--glass); border: 1px solid var(--oro-caldo);
             width: 45px; height: 45px; border-radius: 50%;
-            display: none; justify-content: center; align-items: center;
+            display: flex; justify-content: center; align-items: center;
             cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s;
         }
         #music-control svg { width: 20px; fill: var(--salvia-deep); }
@@ -46,7 +54,7 @@
             z-index: 9999; transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 2.5s;
         }
         .envelope-wrapper {
-            position: relative; width: 100vw; height: 85vh;
+            position: relative; width: 100vw; height: 70vh;
             display: flex; justify-content: center; align-items: center; overflow: hidden;
         }
         .envelope-img { width: 100%; height: 100%; object-fit: cover; }
@@ -60,11 +68,12 @@
         .wax-img:hover { transform: translate(-50%, -50%) scale(1.1); }
         
         .hint-text {
-            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 0.9rem;
-            color: #ccc; letter-spacing: 1px; margin-top: -50px; opacity: 0.7;
-            animation: pulse 3s infinite ease-in-out; pointer-events: none;
+            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.1rem;
+            color: var(--salvia-deep); letter-spacing: 1px; margin-top: 20px;
+            animation: pulse 2.5s infinite ease-in-out; text-align: center;
+            z-index: 21;
         }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-5px); } }
 
         #busta-container.svanito { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -131,7 +140,7 @@
             border-top: 1px solid var(--perla);
         }
 
-        /* SLIDER FOTO - AGGIORNATO PER TOUCH */
+        /* SLIDER FOTO */
         .slider-wrapper { overflow-x: auto; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; }
         .slider-wrapper::-webkit-scrollbar { display: none; }
         .slider-track { display: flex; width: max-content; animation: scrollInfinite 60s linear infinite; }
@@ -155,7 +164,6 @@
             width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; 
             font-weight: 600; font-size: 0.9rem; position: relative; overflow: hidden; transition: 0.5s;
         }
-        .btn-lux:hover { background: #3d6140; }
 
         /* STORIA EDITORIALE */
         .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 1.9; color: #3d3d3d; hyphens: auto; }
@@ -174,9 +182,12 @@
 </head>
 <body>
 
-<div id="music-control" onclick="toggleAudio()">
-    <svg id="icon-play" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-    <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+<div id="music-wrapper">
+    <span class="music-label">Musica</span>
+    <div id="music-control" onclick="toggleAudio()">
+        <svg id="icon-play" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </div>
 </div>
 
 <div id="busta-container">
@@ -184,7 +195,7 @@
         <img src="busta.png" class="envelope-img">
         <img src="bollino.png" class="wax-img" onclick="openWedding()">
     </div>
-    <div class="hint-text">Premi sul bollino per aprire l'invito</div>
+    <div class="hint-text">Premi sul bollino per scoprire il contenuto</div>
 </div>
 
 <audio id="audio" loop><source src="alex-productions-musica-romantica-per-matrimoni-e-san-valentino-amore(chosic.com).mp3" type="audio/mpeg"></audio>
@@ -223,7 +234,7 @@
                 <p style="font-size: 0.9rem;">Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.076840748135!2d12.228965776822268!3d45.56840897107567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477936a2810a97c9%3A0xc68225576189999a!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Santrovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000!5m2!1sit!2sit">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant&#39;Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000">
                     </iframe>
                 </div>
             </div>
@@ -240,7 +251,7 @@
                 <p style="font-size: 0.9rem;">Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2787.037130986704!2d12.617477676828555!3d45.850550571083414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477963d330d1d733%3A0x86830720546c4349!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1710180000001!5m2!1sit!2sit">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.136367352844!2d12.6300435!3d45.8378906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477be7167a58b293%3A0x4466c42171477764!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1710180000000">
                     </iframe>
                 </div>
             </div>
@@ -254,7 +265,7 @@
             <p style="font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.2rem; color: var(--salvia-deep); margin-bottom: 20px;">I momenti più belli sono quelli catturati per caso.</p>
         </div>
         <div class="slider-wrapper">
-            <div class="slider-track" id="slider-track">
+            <div class="slider-track">
                 <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
                 <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
                 <img src="h.jpg"> <img src="i.jpg"> <img src="l.jpg"> <img src="m.jpg">
@@ -275,29 +286,10 @@
                 <p style="font-size: 0.95rem;">Il dono più grande è la vostra presenza. Se desiderate contribuire al nostro futuro, potete farlo qui:</p>
                 <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-caldo); margin-top: 25px; border-radius: 2px;">
                     <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-caldo); margin-bottom: 10px; text-transform: uppercase;">IBAN intestato a TRONCHIN GREGORIO</p>
-                    <p id="iban-text" style="font-size: 1.1rem; letter-spacing: 1px; color: var(--salvia-deep); font-weight: 500; white-space: nowrap;">IT 00 X 00000 00000 000000000000</p>
+                    <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">IT 00 X 00000 00000 000000000000</p>
                     <button class="copy-btn" onclick="copyIban()">Copia IBAN</button>
                     <p style="font-size: 0.9rem; font-style: italic; margin-top: 15px;">Vi ringraziamo di cuore</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-salvia">
-        <div class="container">
-            <div class="info-card">
-                <h2>R.S.V.P.</h2>
-                <div class="linea-oro"></div>
-                <p>Conferma la tua presenza entro il</p>
-                <p style="font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600; letter-spacing: 1px;">30 Agosto 2026</p>
-                <form class="form-container" action="https://formsubmit.co/chiaraavincenzi01@gmail.com" method="POST">
-                    <input type="text" name="Nome" placeholder="Nome e Cognome" class="input-wedding" required>
-                    <textarea name="Allergie" rows="2" placeholder="Allergie o intolleranze" class="input-wedding"></textarea>
-                    <textarea name="Messaggio" rows="2" placeholder="Eventuali note ulteriori o messaggi per noi" class="input-wedding"></textarea>
-                    <input type="hidden" name="_next" value="https://tuo-sito.it/grazie.html">
-                    <input type="hidden" name="_subject" value="Nuova RSVP Matrimonio!">
-                    <button type="submit" class="btn-lux">Invia conferma</button>
-                </form>
             </div>
         </div>
     </section>
@@ -327,6 +319,23 @@
                     <div class="faq-question">Foto e Video? <span>+</span></div>
                     <div class="faq-answer">In chiesa vi chiediamo di godervi il momento lasciando i telefoni in borsa. Durante il ricevimento, invece, sentitevi liberi di scattare e condividere ogni attimo!</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-salvia">
+        <div class="container">
+            <div class="info-card">
+                <h2>R.S.V.P.</h2>
+                <div class="linea-oro"></div>
+                <p>Conferma la tua presenza entro il</p>
+                <p style="font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600; letter-spacing: 1px;">30 Agosto 2026</p>
+                <form class="form-container" action="https://formsubmit.co/chiaraavincenzi01@gmail.com" method="POST">
+                    <input type="text" name="Nome" placeholder="Nome e Cognome" class="input-wedding" required>
+                    <textarea name="Allergie" rows="2" placeholder="Allergie o intolleranze" class="input-wedding"></textarea>
+                    <textarea name="Messaggio" rows="2" placeholder="Eventuali note ulteriori o messaggi per noi" class="input-wedding"></textarea>
+                    <button type="submit" class="btn-lux">Invia conferma</button>
+                </form>
             </div>
         </div>
     </section>
@@ -364,14 +373,14 @@
 
 <script>
     const audio = document.getElementById("audio");
-    const musicControl = document.getElementById("music-control");
+    const musicWrapper = document.getElementById("music-wrapper");
     const iconPlay = document.getElementById("icon-play");
     const iconPause = document.getElementById("icon-pause");
 
     function openWedding() {
         document.getElementById("busta-container").classList.add("svanito");
-        audio.play().catch(e => { console.log("Autoplay bloccato dai browser") });
-        musicControl.style.display = "flex";
+        audio.play().catch(e => { console.log("Interazione richiesta") });
+        musicWrapper.style.display = "flex";
         
         setTimeout(() => {
             const main = document.getElementById("main-content");
@@ -397,27 +406,7 @@
     function copyIban() {
         const iban = document.getElementById("iban-text").innerText;
         navigator.clipboard.writeText(iban).then(() => {
-            alert("IBAN copiato negli appunti!");
-        });
-    }
-
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallax = document.getElementById('hero-parallax');
-        if(parallax) parallax.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
-    });
-
-    function initScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.info-card').forEach(card => {
-            observer.observe(card);
+            alert("IBAN copiato!");
         });
     }
 
@@ -435,13 +424,27 @@
         }, 1000);
     }
 
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.info-card').forEach(card => observer.observe(card));
+    }
+
     document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            if (e.target.closest('.faq-answer')) return;
+        item.addEventListener('click', function() {
             this.classList.toggle('active');
             const span = this.querySelector('span');
             if(span) span.innerText = this.classList.contains('active') ? '-' : '+';
         });
+    });
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.getElementById('hero-parallax');
+        if(parallax) parallax.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
     });
 </script>
 </body>
