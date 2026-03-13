@@ -13,7 +13,6 @@
             --salvia-deep: #4e7a51;
             --arancio-seta: #FDEBD0;
             --arancio-lux: #FCDABF;
-            /* 1. DETTAGLIO ORO VERO (Gradient) */
             --oro-caldo: linear-gradient(90deg, #AF953F, #FEE993, #AF953F);
             --oro-solid: #D4AF37;
             --text: #2C362B;
@@ -29,27 +28,25 @@
             color: var(--text); 
             overflow-x: hidden; 
             -webkit-font-smoothing: antialiased;
+            /* Protezione copyright */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        /* --- AUDIO CONTROL --- */
+        /* --- AUDIO CONTROL AGGIORNATO --- */
         #music-wrapper {
             position: fixed; top: 20px; right: 20px; z-index: 10001;
-            display: none; align-items: center; gap: 10px;
-        }
-        .music-label {
-            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 0.8rem;
-            color: var(--salvia-deep); background: var(--glass); padding: 5px 10px;
-            border-radius: 15px; border: 0.5px solid var(--oro-solid);
+            display: none;
         }
         #music-control {
             background: var(--glass); border: 1px solid var(--oro-solid);
             width: 45px; height: 45px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s;
+            cursor: pointer; backdrop-filter: blur(5px);
         }
-        #music-control svg { width: 20px; fill: var(--salvia-deep); }
+        #music-control svg { width: 24px; height: 24px; fill: var(--salvia-deep); }
 
-        /* BUSTA ESTERNA - EXTRA LARGE */
+        /* BUSTA ESTERNA */
         #busta-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -59,35 +56,21 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center; overflow: hidden;
         }
-        .envelope-img { 
-            width: 120%; height: 120%; /* Ingrandita ulteriormente */
-            object-fit: cover; 
-            filter: brightness(1.02);
-        }
+        .envelope-img { width: 120%; height: 120%; object-fit: cover; filter: brightness(1.02); }
 
-        /* 3. MICRO INTERAZIONE SIGILLO */
+        /* MICRO INTERAZIONE SIGILLO */
         .wax-img { 
-            position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 210px; height: auto; cursor: pointer; 
-            z-index: 20; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2));
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 210px; height: auto; cursor: pointer; z-index: 20; 
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .wax-img:hover { 
-            transform: translate(-50%, -50%) scale(1.1) rotate(5deg); 
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
-        }
+        .wax-img:hover { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
         
         .hint-text {
-            position: absolute; bottom: 15%;
-            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.2rem;
-            color: var(--salvia-deep); letter-spacing: 1px;
-            animation: breathe 3s infinite ease-in-out; /* Effetto scompare-ricompare */
-            text-align: center;
-            z-index: 21; width: 100%;
+            position: absolute; bottom: 15%; font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.2rem;
+            color: var(--salvia-deep); animation: breathe 3s infinite ease-in-out; text-align: center; z-index: 21; width: 100%;
         }
         @keyframes breathe { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.8; } }
-
         #busta-container.svanito { opacity: 0; visibility: hidden; pointer-events: none; }
 
         /* HERO & PARALLAX */
@@ -101,21 +84,15 @@
         @keyframes panImage { 0% { transform: scale(1.1) translateX(-5%); } 100% { transform: scale(1.1) translateX(5%); } }
 
         .hero-banner {
-            z-index: 2; width: 100%; 
-            background: var(--glass); 
-            backdrop-filter: blur(10px); 
-            padding: 20px 0;
-            border-top: 0.5px solid rgba(212, 175, 55, 0.3); 
-            border-bottom: 0.5px solid rgba(212, 175, 55, 0.3);
+            z-index: 2; width: 100%; background: var(--glass); backdrop-filter: blur(10px); 
+            padding: 20px 0; border-top: 0.5px solid rgba(212, 175, 55, 0.3); border-bottom: 0.5px solid rgba(212, 175, 55, 0.3);
             text-align: center;
         }
         .hero-banner h1 { font-family: 'Great Vibes'; font-size: 4rem; color: var(--salvia-deep); margin: 0; font-weight: 400; }
 
         .info-card { 
-            opacity: 0; transform: translateY(50px); 
-            transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
-            background: white; padding: 40px 20px; 
-            box-shadow: 0 15px 50px rgba(0,0,0,0.03); 
+            opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+            background: white; padding: 40px 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.03); 
             position: relative; margin-bottom: 40px; border-radius: 4px; 
         }
         .info-card.visible { opacity: 1; transform: translateY(0); }
@@ -129,74 +106,36 @@
         section { padding: 80px 20px; text-align: center; }
         .container { max-width: 1000px; margin: auto; }
         h2 { font-family: 'Cormorant Garamond'; font-size: 2.8rem; color: var(--salvia-deep); margin-bottom: 20px; font-weight: 300; }
+        .linea-oro { width: 60px; height: 2px; background: var(--oro-caldo); margin: 15px auto; }
         
-        /* 1. LINEA ORO VERO */
-        .linea-oro { 
-            width: 60px; height: 2px; 
-            background: var(--oro-caldo); 
-            margin: 15px auto; 
-        }
-        
-        .bg-perla { background-color: var(--perla); }
-        .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); }
-        .bg-arancio { background-color: var(--arancio-seta); }
-        .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
-
-        /* 4. COUNTDOWN STYLIZZATO */
-        .count-grid { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: nowrap; }
+        /* COUNTDOWN ORIGINALE QUADRATO */
+        .count-grid { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
         .count-item { 
-            flex: 0 1 90px; height: 90px;
-            display: flex; flex-direction: column; justify-content: center;
-            background: rgba(255,255,255,0.4); 
-            border: 1px solid var(--oro-solid); backdrop-filter: blur(10px);
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 0 1 90px; padding: 20px 5px; background: rgba(255,255,255,0.8); 
+            border: 0.5px solid var(--oro-solid); 
         }
-        .count-item span { display: block; font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600; }
-        .count-item label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; margin-top: -2px; }
+        .count-item span { display: block; font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600; }
+        .count-item label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* MAPPE */
-        .info-card::after { content: ""; position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px; border: 0.5px solid var(--arancio-lux); pointer-events: none; }
-        .map-container { 
-            height: 350px; margin: 30px -20px -40px -20px; 
-            overflow: hidden; filter: sepia(0.2) contrast(0.9);
-            border-top: 1px solid var(--perla);
-        }
+        /* TIMELINE ORIZZONTALE COLLAPSABLE */
+        .timeline-section { margin: 20px 0; border: 1px solid var(--arancio-lux); border-radius: 8px; background: #fff; overflow: hidden; }
+        .timeline-summary { padding: 20px; font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.3rem; color: var(--salvia-deep); cursor: pointer; outline: none; list-style: none; }
+        .timeline-scroll { display: flex; overflow-x: auto; padding: 30px 20px; gap: 30px; scrollbar-width: none; }
+        .timeline-scroll::-webkit-scrollbar { display: none; }
+        .timeline-unit { min-width: 110px; flex-shrink: 0; position: relative; }
+        .timeline-unit .time { font-family: 'Cormorant Garamond'; font-weight: 600; color: var(--salvia-deep); font-size: 1.2rem; display: block; }
+        .timeline-unit .event { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; color: #555; }
 
-        /* SLIDER FOTO INTERATTIVO */
-        .slider-wrapper { 
-            overflow: hidden; 
-            padding: 20px 0; 
-            width: 100%;
-            cursor: grab;
-            touch-action: pan-y; 
-        }
-        .slider-track { 
-            display: flex; 
-            width: max-content; 
-        }
-        /* 2. OVERLAY PER LE FOTO */
+        /* SLIDER FOTO CON OVERLAY */
+        .slider-wrapper { overflow: hidden; padding: 20px 0; width: 100%; cursor: grab; }
+        .slider-track { display: flex; width: max-content; }
         .slider-track img { 
-            width: 220px; 
-            height: 320px; 
-            object-fit: cover; 
-            margin: 0 10px; 
-            border: 10px solid white; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
-            pointer-events: none; 
-            filter: sepia(0.15) brightness(0.95) contrast(1.05); /* Effetto caldo e uniforme */
-            transition: 0.3s;
+            width: 220px; height: 320px; object-fit: cover; margin: 0 10px; 
+            border: 10px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+            filter: sepia(0.15) brightness(0.95) contrast(1.05); /* Overlay richiesto */
         }
 
-        /* 5. TIMELINE STYLING */
-        .timeline { margin: 40px auto; position: relative; max-width: 600px; }
-        .timeline::before { content: ''; position: absolute; left: 50%; width: 1px; height: 100%; background: var(--oro-solid); }
-        .timeline-item { margin-bottom: 30px; position: relative; width: 50%; text-align: right; padding-right: 30px; }
-        .timeline-item:nth-child(even) { margin-left: 50%; text-align: left; padding-right: 0; padding-left: 30px; }
-        .timeline-item::after { content: ''; position: absolute; right: -6px; top: 5px; width: 12px; height: 12px; background: white; border: 2px solid var(--oro-solid); border-radius: 50%; z-index: 1; }
-        .timeline-item:nth-child(even)::after { left: -6px; }
-        .time { font-family: 'Cormorant Garamond'; font-weight: 600; color: var(--salvia-deep); font-size: 1.2rem; display: block; }
-        .event { font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+        .map-container { height: 350px; margin: 30px -20px -40px -20px; overflow: hidden; filter: sepia(0.2) contrast(0.9); border-top: 1px solid var(--perla); }
 
         /* FAQ */
         .faq-container { max-width: 750px; margin: 30px auto; text-align: left; }
@@ -205,38 +144,33 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 20px; font-size: 1rem; line-height: 1.8; color: #555; }
         .faq-item.active .faq-answer { max-height: 500px; padding-bottom: 20px; }
 
-        /* IBAN & RSVP */
-        .copy-btn { margin-top: 10px; background: none; border: 1px solid var(--oro-solid); color: var(--oro-solid); padding: 5px 15px; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
-        .form-container { max-width: 550px; margin: 30px auto 0; background: white; padding: 40px 30px; }
-        .input-wedding { width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright); font-family: 'Montserrat'; font-size: 0.95rem; }
-        .btn-lux { 
-            background: var(--salvia-deep); color: white; padding: 20px; border: none; 
-            width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; 
-            font-weight: 600; font-size: 0.9rem; position: relative; overflow: hidden; transition: 0.5s;
-        }
+        .btn-lux { background: var(--salvia-deep); color: white; padding: 20px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: 600; }
 
         /* STORIA */
         .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 1.9; color: #3d3d3d; }
         .storia-content p:first-of-type::first-letter { font-family: 'Great Vibes'; font-size: 3.5rem; float: left; margin-right: 12px; color: var(--oro-solid); line-height: 1; }
         .storia-decor { text-align: center; font-size: 2.5rem; color: var(--oro-solid); margin: 50px 0; opacity: 0.6; }
 
-        footer { padding: 100px 20px; background: white; border-top: 1px solid var(--arancio-seta); text-align: center; }
+        /* BOLLINO COPYRIGHT */
+        .copyright-tag { padding: 40px 20px; background: #fff; text-align: center; font-size: 0.7rem; color: #999; letter-spacing: 1px; text-transform: uppercase; }
+
+        footer { padding: 100px 20px; background: white; text-align: center; border-top: 1px solid var(--arancio-seta); }
 
         @media (max-width: 480px) {
             .hero-banner h1 { font-size: 2.8rem; }
             h2 { font-size: 2rem; }
             .count-grid { gap: 8px; }
-            .count-item { flex: 0 1 75px; height: 75px; }
+            .count-item { flex: 0 1 75px; padding: 15px 5px; }
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <div id="music-wrapper">
-    <span class="music-label">Musica</span>
     <div id="music-control" onclick="toggleAudio()">
-        <svg id="icon-play" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <svg id="icon-audio" viewBox="0 0 24 24">
+            <path id="audio-path" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
     </div>
 </div>
 
@@ -255,7 +189,7 @@
     <section class="hero">
         <div class="hero-img" id="hero-parallax"></div>
         <div class="hero-banner">
-            <h1 style="font-family: 'Great Vibes'; color: var(--salvia-deep); margin: 5px 0; font-weight: 400;">Chiara & Gregorio</h1>
+            <h1>Chiara & Gregorio</h1>
             <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.2rem; margin: 0 15px; color: var(--salvia-deep); opacity: 0.8;"> "Non pregarmi di lasciarti, per andarmene via da te; perché dove andrai tu, andrò anch'io; e dove starai tu, io pure starò; il tuo popolo sarà il mio popolo e il tuo Dio sarà il mio Dio; dove morirai tu, morirò anch'io e là sarò sepolta. Il Signore mi tratti con il massimo rigore, se altra cosa che la morte mi separerà da te" RUT 1, 16-17</p>
         </div>
     </section>
@@ -276,52 +210,43 @@
 
     <section class="bg-perla">
         <div class="container">
-            <h2>Il Programma</h2>
-            <div class="linea-oro"></div>
-            <div class="timeline">
-                <div class="timeline-item"><span class="time">11:00</span><span class="event">Cerimonia in Chiesa</span></div>
-                <div class="timeline-item"><span class="time">13:00</span><span class="event">Arrivo in Villa & Aperitivo</span></div>
-                <div class="timeline-item"><span class="time">14:30</span><span class="event">Pranzo in Sala</span></div>
-                <div class="timeline-item"><span class="time">17:30</span><span class="event">Taglio della Torta</span></div>
-                <div class="timeline-item"><span class="time">18:30</span><span class="event">Buffet di Dolci</span></div>
-                <div class="timeline-item"><span class="time">19:30</span><span class="event">Open Bar & Party</span></div>
-            </div>
+            <details class="timeline-section">
+                <summary class="timeline-summary">Scopri il programma della giornata ▼</summary>
+                <div class="linea-oro"></div>
+                <div class="timeline-scroll">
+                    <div class="timeline-unit"><span class="time">11:00</span><span class="event">Cerimonia</span></div>
+                    <div class="timeline-unit"><span class="time">13:00</span><span class="event">Aperitivo</span></div>
+                    <div class="timeline-unit"><span class="time">14:30</span><span class="event">Pranzo</span></div>
+                    <div class="timeline-unit"><span class="time">17:30</span><span class="event">Torta</span></div>
+                    <div class="timeline-unit"><span class="time">18:30</span><span class="event">Buffet Dolci</span></div>
+                    <div class="timeline-unit"><span class="time">19:30</span><span class="event">Open Bar & Party</span></div>
+                </div>
+            </details>
         </div>
     </section>
 
     <section class="bg-perla">
-        <div class="container">
-            <div class="info-card">
-                <h2>La Cerimonia</h2>
-                <div class="linea-oro"></div>
-                <p>Sabato 3 Ottobre alle ore 11:00</p>
-                <p><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
-                <p style="font-size: 0.9rem;">Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-                <div class="map-container">
-                    <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant'Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000"></iframe>
-                </div>
+        <div class="container info-card">
+            <h2>La Cerimonia</h2>
+            <div class="linea-oro"></div>
+            <p>Sabato 3 Ottobre alle ore 11:00</p>
+            <p><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
+            <p style="font-size: 0.9rem;">Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
+            <div class="map-container">
+                <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant'Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000"></iframe>
             </div>
         </div>
     </section>
 
     <section class="bg-arancio">
-        <div class="container">
-            <div class="info-card" style="border-top: 5px solid var(--arancio-lux);">
-                <h2>Il Ricevimento</h2>
-                <div class="linea-oro"></div>
-                <p>Dopo la cerimonia, festeggeremo insieme presso:</p>
-                <p><strong>Villa Luppis</strong></p>
-                <p style="font-size: 0.9rem;">Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
-                <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.8761162232386!2d12.571597975476342!3d45.83376240870616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796776da397e61%3A0x67e27ce8095e65b1!2sHotel%20Villa%20Luppis!5e0!3m2!1sit!2sit!4v1773323461500!5m2!1sit!2sit"
-    width="100%" 
-    height="100%" 
-    style="border:0;" 
-    allowfullscreen="" 
-    loading="lazy" 
-    referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-                </div>
+        <div class="container info-card" style="border-top: 5px solid var(--arancio-lux);">
+            <h2>Il Ricevimento</h2>
+            <div class="linea-oro"></div>
+            <p>Dopo la cerimonia, festeggeremo insieme presso:</p>
+            <p><strong>Villa Luppis</strong></p>
+            <p style="font-size: 0.9rem;">Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.8761162232386!2d12.571597975476342!3d45.83376240870616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796776da397e61%3A0x67e27ce8095e65b1!2sHotel%20Villa%20Luppis!5e0!3m2!1sit!2sit!4v1773323461500!5m2!1sit!2sit" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -339,35 +264,22 @@
                 <img src="h.jpg"> <img src="i.jpg"> <img src="l.jpg"> <img src="m.jpg">
                 <img src="n.jpg"> <img src="o.jpg"> <img src="p.jpg"> <img src="q.jpg">
                 <img src="r.jpg"> <img src="v.jpg"> <img src="u.jpg"> <img src="s.jpg">
-                <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
-                <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
-                <img src="h.jpg"> <img src="i.jpg"> <img src="l.jpg"> <img src="m.jpg">
-                <img src="n.jpg"> <img src="o.jpg"> <img src="p.jpg"> <img src="q.jpg">
-                <img src="r.jpg"> <img src="v.jpg"> <img src="u.jpg"> <img src="s.jpg">
             </div>
         </div>
     </section>
-<section class="bg-perla">
-        <div class="container">
-            <div class="info-card">
-                <h2>Wedding Wishlist</h2>
-                <div class="linea-oro"></div>
-                <p style="font-size: 0.95rem; margin-bottom: 10px;">Il dono più grande che possiamo ricevere è la vostra presenza.</p>
-                <p style="font-size: 0.95rem;">Ma se desiderate contribuire a rendere il progetto della nostra casa più solido, il vostro pensiero sarà per noi un mattoncino in più per la cotruzione del nostro futuro, dove speriamo di potervi accogliere al più presto.</p>
-                <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-solid); margin-top: 25px; position: relative;">
-                    <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-solid); margin-bottom: 10px; text-transform: uppercase;">IBAN intestato a TRONCHIN GREGORIO</p>
-                    <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600; white-space: nowrap; overflow: hidden;">IT 00 X 00000 00000 000000000000</p>
-                    <p style="font-weight: bold; font-style: italic; font-family: serif; font-size: 1.1rem; margin: 15px 0; color: #ffb07c;">Grazie di cuore</p>
-                    <button class="copy-btn" onclick="copyIban()">Copia IBAN</button>
-                    
-                    <div id="copy-banner" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: column; border-radius: 8px; z-index: 10;">
-                        <span style="font-size: 50px; color: #ffb07c;">❤️</span>
-                        <p style="font-weight: bold; color: var(--salvia-deep); margin-top: 10px;">IBAN copiato!</p>
-                    </div>
-                </div>
+
+    <section class="bg-perla">
+        <div class="container info-card">
+            <h2>Wedding Wishlist</h2>
+            <div class="linea-oro"></div>
+            <p style="font-size: 0.95rem;">Il dono più grande che possiamo ricevere è la vostra presenza. Ma se desiderate contribuire al nostro futuro...</p>
+            <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-solid); margin-top: 25px; position: relative;">
+                <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-solid); margin-bottom: 10px; text-transform: uppercase;">IBAN TRONCHIN GREGORIO</p>
+                <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600;">IT 00 X 00000 00000 000000000000</p>
+                <button class="copy-btn" onclick="copyIban()" style="margin-top:10px; border:1px solid var(--oro-solid); background:none; color:var(--oro-solid); padding:5px 15px; cursor:pointer;">Copia IBAN</button>
             </div>
         </div>
-</section>
+    </section>
 
     <section class="bg-arancio">
         <div class="container">
@@ -376,74 +288,39 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">Posso portare un accompagnatore? <span>+</span></div>
-                    <div class="faq-answer">Se desideri essere accompagnato, ti preghiamo di indicarlo nelle note. Ti contatteremo il prima possibile per confermare il tuo +1.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">C'è parcheggio? <span>+</span></div>
-                    <div class="faq-answer">Sia la chiesa che la villa dispongono di ampi parcheggi.</div>
+                    <div class="faq-answer">Se desideri essere accompagnato, ti preghiamo di indicarlo nelle note.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Che dress code devo seguire? <span>+</span></div>
-                    <div class="faq-answer">Elegante e formale. Evita il bianco, riservato alla sposa e le sfumature dell'arancione, colore scelto per le nostre testimoni.</div>
-                </div>
-                 <div class="faq-item">
-                    <div class="faq-question">Sono vegetariano/vegano, verrò discriminato? <span>+</span></div>
-                    <div class="faq-answer">Assolutamente si... ehm, volevamo dire... no! Non sarete costretti a brucare l'erba del giardino di Villa Luppis, non vi preoccupate! Chiara ha insistito affinchè ci fosse un menù per ogni esigenza. Gregorio ha provato ad opporsi per avere più arrosto per sé, ma ha perso la battaglia. Vegani, celiaci e allergici: siete in una botte di ferro. Ricordatevi di segnarcelo nell'RSVP così che possiamo organizzarci nel migliore dei modi. </div>
+                    <div class="faq-answer">Elegante e formale. Evita il bianco e l'arancione.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Ci sarà da ballare? <span>+</span></div>
-                    <div class="faq-answer">Se non finite la serata con i piedi doloranti e la cravatta sulla fronte, avremo fallito come sposi. Siete avvisati: portate scarpe comode e tanta carica!.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Ma siete proprio sicuri di sposarvi? <span>+</span></div>
-                    <div class="faq-answer">Assolutamente si, è il nostro desiderio più grande! Anche perchè Gregorio ha già studiato la planimetria del buffet salato e, per quel giorno, i nostri genitori hanno già ingaggiato quattro bodyguard con le nostre foto segnaletiche in modalità 'WARNING': se ci avvistano anche a lunga distanza, hanno l’ordine di far scattare l’allarme per impedirci di rientrare in casa loro a scroccare corrente e acqua calda. Altro che soddisfatti o rimborsati, ormai siamo fuori! Ma va benissimo così, noi non vediamo l'ora di costruire il nostro futuro insieme!</div>
+                    <div class="faq-question">Sono vegetariano/vegano? <span>+</span></div>
+                    <div class="faq-answer">Non preoccupatevi! Abbiamo previsto menù per ogni esigenza. Segnatelo nell'RSVP.</div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="bg-salvia">
-        <div class="container">
-            <div class="info-card">
-                <h2>R.S.V.P.</h2>
-                <div class="linea-oro"></div>
-                <p>Conferma la tua presenza entro il</p>
-                <p style="font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600;">30 Agosto 2026</p>
-                <form class="form-container" action="https://formsubmit.co/chiaraavincenzi01@gmail.com" method="POST">
-                    <input type="text" name="Nome" placeholder="Nome e Cognome" class="input-wedding" required>
-                    <textarea name="Allergie" rows="2" placeholder="Allergie o intolleranze" class="input-wedding"></textarea>
-                    <textarea name="Messaggio" rows="2" placeholder="Note per noi" class="input-wedding"></textarea>
-                    <button type="submit" class="btn-lux">Invia conferma</button>
-                </form>
-            </div>
+        <div class="container info-card">
+            <h2>R.S.V.P.</h2>
+            <div class="linea-oro"></div>
+            <p>Conferma entro il 30 Agosto 2026</p>
+            <form action="https://formsubmit.co/chiaraavincenzi01@gmail.com" method="POST" style="margin-top:20px;">
+                <input type="text" name="Nome" placeholder="Nome e Cognome" class="input-wedding" required style="width:100%; padding:15px; border:none; border-bottom:1px solid #ddd; margin-bottom:20px;">
+                <button type="submit" class="btn-lux">Invia conferma</button>
+            </form>
         </div>
     </section>
 
-<section class="section-storia bg-arancio-gradiente">
-    <div class="container">
-        <div class="storia-content">
-            
+    <section class="section-storia bg-arancio-gradiente">
+        <div class="container storia-content">
             <details style="cursor: pointer;">
-                <summary style="list-style: none; text-align: center; font-style: italic; margin-bottom: 20px; color: #666; text-transform: UPPERCASE; outline: none;">
-                    E infine, ma non per importanza, per chi ha voglia di scoprire come siamo arrivati fino a qui, ecco a voi...
-                    <div style="font-size: 1.2rem; margin-top: 10px;">▼</div>
+                <summary style="list-style: none; text-align: center; font-style: italic; color: #666; outline: none;">
+                    La nostra Storia ▼
                 </summary>
-
-                <h2 style="text-align: center;">La nostra Storia</h2>
                 <div class="storia-decor">~ ❦ ~</div>
-                
-                <style>
-                    .capolettera::first-letter {
-                        float: left;
-                        font-size: 5rem;
-                        line-height: 1;
-                        padding-right: 8px;
-                        padding-top: 4px;
-                        color: #d4a373; /* Un colore oro/arancio che richiama il tuo gradiente */
-                        font-family: 'Georgia', serif; /* O un font simile a quelli Disney/Fiabeschi */
-                    }
-                </style>
-
                 <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita...</p>
                   <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita in un intrico di parentele che li legava come rami di un unico albero: Nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
                
@@ -470,32 +347,34 @@
                 <p>Non fu sempre tutto rose e fiori ma ciò che ha importanza è che nelle loro dure battaglie crebbero insieme, migliorandosi a vicenda giorno dopo giorno. Dal non trovare un senso da dare alla propria vita, al trovarlo l’uno nell’altra. Dal non sapere niente sul proprio futuro, al realizzare che comunque, avrebbero desiderato passarlo insieme. Questa è la loro storia, la storia di due persone che grazie a Dio si sono trovate, scelte e amate e che insieme, come hanno sempre fatto, sono pronte a scrivere un nuovo capitolo della loro vita.</p>
                
                 <p>Oggi, mentre si preparano a pronunciare il fatidico "sì”, Chiara e Gregorio guardano indietro con nostalgia e gratitudine. E mentre si stringono la mano con un sorriso che dice più di mille parole, sentono ancora il battito accelerato del cuore al pensiero che il disegno che il Signore ha creato per loro è stato perfetto, unendoli sin dall’inizio dei tempi. Dio in questo loro percorso è stato ed è tuttora fondamentale, come se fosse il tessuto prezioso che tramite il filo dell’amore, ha dato vita alla loro storia in un ricamo meravigliosamente perfetto, come solo ed esclusivamente lui avrebbe mai potuto fare. E’ stato la loro stella polare, li ha guidati come un faro verso la luce della propria vocazione. Vocazione che oggi, porta con sé un nome ed un cognome: Chiara Vincenzi per lui e Gregorio Tronchin per lei.</p>     
-                <div class="storia-decor">~ ❦ ~</div>
+                              <div class="storia-decor">~ ❦ ~</div>
             </details>
         </div>
-    </div>
-</section>
+    </section>
 
     <footer>
-        <h1 style="font-family: 'Great Vibes'; font-size: 3rem; color: var(--salvia-deep); margin-bottom: 5px;">Chiara & Gregorio</h1>
-        <p style="letter-spacing: 3px; font-weight: 300; color: var(--oro-solid);">03 OTTOBRE 2026</p>
+        <h1 style="font-family: 'Great Vibes'; font-size: 3rem; color: var(--salvia-deep);">Chiara & Gregorio</h1>
+        <p style="letter-spacing: 3px; color: var(--oro-solid);">03 OTTOBRE 2026</p>
     </footer>
+
+    <div class="copyright-tag">
+        © 2026 Chiara & Gregorio Wedding - Strictly Personal Use.<br>
+        Coding and Design protected.
+    </div>
 
 </div>
 
 <script>
     const audio = document.getElementById("audio");
-    const musicWrapper = document.getElementById("music-wrapper");
-    const track = document.getElementById("slider-track");
+    const audioPath = document.getElementById("audio-path");
 
     function openWedding() {
         document.getElementById("busta-container").classList.add("svanito");
-        audio.play().catch(e => { console.log("Audio blocked") });
-        musicWrapper.style.display = "flex";
+        audio.play().catch(() => {});
+        document.getElementById("music-wrapper").style.display = "block";
         setTimeout(() => {
             const main = document.getElementById("main-content");
-            main.style.visibility = "visible";
-            main.style.opacity = "1";
+            main.style.visibility = "visible"; main.style.opacity = "1";
             startTimer();
             initScrollReveal();
         }, 1000);
@@ -504,114 +383,41 @@
     function toggleAudio() {
         if (audio.paused) {
             audio.play();
-            document.getElementById("icon-play").style.display = "none";
-            document.getElementById("icon-pause").style.display = "block";
+            audioPath.setAttribute("d", "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z");
         } else {
             audio.pause();
-            document.getElementById("icon-play").style.display = "block";
-            document.getElementById("icon-pause").style.display = "none";
+            audioPath.setAttribute("d", "M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z");
         }
-    }
-// --- LOGICA SLIDER INTERATTIVO ---
-    const sliderWrapper = document.querySelector('.slider-wrapper');
-    const sliderTrack = document.getElementById('slider-track');
-    let isDragging = false;
-    let startX, scrollLeft;
-    let currentX = 0;
-    let speed = 0.8; // Velocità: più basso è, più è lento
-
-    function autoScroll() {
-        if (!isDragging) {
-            currentX -= speed;
-            if (Math.abs(currentX) >= sliderTrack.scrollWidth / 2) {
-                currentX = 0;
-            }
-            sliderTrack.style.transform = `translateX(${currentX}px)`;
-        }
-        requestAnimationFrame(autoScroll);
-    }
-
-    sliderWrapper.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.pageX - currentX;
-    });
-
-    sliderWrapper.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        startX = e.touches[0].pageX - currentX;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        currentX = e.pageX - startX;
-        checkBounds();
-        sliderTrack.style.transform = `translateX(${currentX}px)`;
-    });
-
-    window.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        currentX = e.touches[0].pageX - startX;
-        checkBounds();
-        sliderTrack.style.transform = `translateX(${currentX}px)`;
-    });
-
-    window.addEventListener('mouseup', () => isDragging = false);
-    window.addEventListener('touchend', () => isDragging = false);
-
-    function checkBounds() {
-        const half = sliderTrack.scrollWidth / 2;
-        if (currentX > 0) currentX = -half;
-        if (Math.abs(currentX) >= half) currentX = 0;
-    }
-
-    autoScroll();
-    // --- FINE LOGICA SLIDER ---
-
-    function copyIban() {
-        const ibanText = document.getElementById('iban-text').innerText;
-        navigator.clipboard.writeText(ibanText).then(() => {
-            const banner = document.getElementById('copy-banner');
-            banner.style.display = 'flex';
-            setTimeout(() => {
-                banner.style.display = 'none';
-            }, 2000);
-        });
     }
 
     function startTimer() {
         const target = new Date("October 3, 2026 11:00:00").getTime();
         setInterval(() => {
-            const now = new Date().getTime();
-            const diff = target - now;
+            const diff = target - new Date().getTime();
             if (diff > 0) {
-                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                document.getElementById("d").innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+                document.getElementById("h").innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById("m").innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById("s").innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
             }
         }, 1000);
     }
 
     function initScrollReveal() {
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.info-card').forEach(card => observer.observe(card));
+        document.querySelectorAll('.info-card').forEach(c => observer.observe(c));
     }
 
-    document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const span = this.querySelector('span');
-            if(span) span.innerText = this.classList.contains('active') ? '-' : '+';
-        });
-    });
+    // Auto-scroll Slider
+    let track = document.getElementById('slider-track');
+    let x = 0;
+    function slide() { x -= 0.6; if (Math.abs(x) >= track.scrollWidth/2) x = 0; track.style.transform = `translateX(${x}px)`; requestAnimationFrame(slide); }
+    slide();
 
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallax = document.getElementById('hero-parallax');
-        if(parallax) parallax.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
-    });
+    // Blocchi per protezione
+    document.onkeydown = (e) => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) return false; }
 </script>
 </body>
 </html>
