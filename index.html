@@ -73,11 +73,12 @@
         @keyframes breathe { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
         #busta-container.svanito { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* HERO & PARALLAX - MODIFICATO PER FOTO ORIZZONTALE */
+        /* HERO & PARALLAX - MODIFICATO PER INQUADRARE LO SPOSO A DESTRA */
         .hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .hero-img {
             position: absolute; width: 100%; height: 140%;
-            background: url("a.jpg") center center/cover no-repeat;
+            /* MODIFICA QUI: background-position impostato a 'right center' */
+            background: url("a.jpg") right center/cover no-repeat;
             z-index: 0; opacity: 0.85;
             animation: panImage 20s ease-in-out infinite alternate;
         }
@@ -262,7 +263,7 @@
                 <p><strong>Villa Luppis</strong></p>
                 
                 <details class="timeline-details">
-                    <summary>Clicca qui per vedere la timeline ▼</summary>
+                    <summary>Clicca se vuoi saperne di più sulla timeline ▼</summary>
                     <div class="timeline-wrapper">
                         <div class="timeline-item"><span class="timeline-time">14:00</span><span class="timeline-desc"> Aperitivo di benvenuto e buffet </span></div>
                         <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc"> Pranzo</span></div>
@@ -310,7 +311,7 @@
                 <p style="font-size: 0.95rem; margin-bottom: 10px;">Il dono più grande che possiamo ricevere è la vostra presenza. </p>
              <p style="font-size: 0.95rem;">Se desiderate contribuire, sostenendoci nella realizzazione della nostra casetta, dove speriamo di potervi invitare al più presto, trovate qui sotto i dettagli dell'IBAN.</p>
                 <p style="font-size: 0.95rem;"> (Si, perchè più che una lista nozze, abbiamo un piano di ammortamento!)</p>
-                <p style="font-size: 0.95rem;">In casi estremi accettiamo anche buoni pasto! in tempi de crisi, tuto fa brodo! 😂 </p>
+                <p style="font-size: 0.95rem;">In casi estremi accettiamo anche buoni pasto! (in tempi di crisi, si impara ad essere creativi) 😂😂 </p>
                 <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-caldo); margin-top: 25px; position: relative;">
                     <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-caldo); margin-bottom: 10px; text-transform: uppercase;">IBAN intestato a VINCENZI CHIARA e TRONCHIN GREGORIO</p>
                     <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600;">IT89X0585661960129571602715</p>
@@ -378,12 +379,12 @@
             <div class="storia-content">
                 <details style="cursor: pointer;">
                     <summary class="storia-summary">
-                        E infine, per chi volesse sapere come siamo arrivati fino a qui, ecco a voi...
-                        <div style="font-size: 1.2rem; margin-top: 10px;">▼</div>
+                        E infine, per chi volesse sapere come siamo arrivati fino a qui, ecco a voi
+                        <div style="font-size: 1.2rem; margin-top: 10px;">SCOPRI LA NOSTRA STORIA ▼</div>
                     </summary>
                     <h2 style="text-align: center;">La nostra Storia</h2>
                     <div class="storia-decor">~ ❦ ~</div>
-                      <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita.</p>
+                                                  <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita.</p>
                
                 <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita, in un intrico di parentele che li legava come rami di un unico albero: Nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
                
@@ -568,4 +569,5 @@
 </script>
 </body>
 </html>
-                                        
+
+              
