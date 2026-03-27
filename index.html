@@ -14,6 +14,7 @@
             --arancio-seta: #FDEBD0;
             --arancio-lux: #FCDABF;
             --oro-caldo: #D4AF37;
+            --oro-intenso: #B8860B; /* Colore aggiunto per visibilità */
             --text: #2C362B;
             --glass: rgba(255, 255, 255, 0.7);
         }
@@ -29,7 +30,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- AUDIO CONTROL MODIFICATO (Altoparlante, no testo) --- */
+        /* --- AUDIO CONTROL --- */
         #music-wrapper {
             position: fixed; top: 20px; right: 20px; z-index: 10001;
             display: none; align-items: center;
@@ -63,29 +64,31 @@
         .wax-img:hover { transform: translate(-50%, -50%) scale(1.05); }
         .hint-text {
             position: absolute; bottom: 15%;
-            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.2rem;
-            color: var(--salvia-deep); letter-spacing: 1px;
+            font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.3rem;
+            color: var(--oro-intenso); letter-spacing: 1px; font-weight: 600;
             animation: breathe 2s infinite ease-in-out;
             text-align: center; z-index: 21; width: 100%;
+            text-shadow: 0px 1px 2px rgba(255,255,255,0.8);
         }
-        @keyframes breathe { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.8; } }
+        @keyframes breathe { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
         #busta-container.svanito { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* HERO & PARALLAX */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        /* HERO & PARALLAX - MODIFICATO PER FOTO ORIZZONTALE */
+        .hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .hero-img {
-            position: absolute; width: 130%; height: 120%;
-            background: url("a.jpg") center top/cover no-repeat;
+            position: absolute; width: 100%; height: 140%;
+            background: url("a.jpg") center center/cover no-repeat;
             z-index: 0; opacity: 0.85;
             animation: panImage 20s ease-in-out infinite alternate;
         }
-        @keyframes panImage { 0% { transform: scale(1.1) translateX(-5%); } 100% { transform: scale(1.1) translateX(5%); } }
+        @keyframes panImage { 0% { transform: scale(1.05) translateY(-5%); } 100% { transform: scale(1.05) translateY(5%); } }
 
         .hero-banner {
             z-index: 2; width: 100%;
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
+            backdrop-filter: blur(8px);
+            padding: 30px 0;
+            margin-top: 15vh;
             border-top: 0.5px solid rgba(212, 175, 55, 0.3);
             border-bottom: 0.5px solid rgba(212, 175, 55, 0.3);
             text-align: center;
@@ -120,8 +123,16 @@
         .bg-arancio { background-color: var(--arancio-seta); }
         .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
 
-        /* TIMELINE ORIZZONTALE ELEGANTE */
-        .timeline-details summary { list-style: none; outline: none; cursor: pointer; color: var(--oro-caldo); font-family: 'Cormorant Garamond'; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        /* TIMELINE - MIGLIORATA VISIBILITÀ */
+        .timeline-details summary { 
+            list-style: none; outline: none; cursor: pointer; 
+            color: var(--salvia-deep); font-family: 'Montserrat'; font-size: 0.8rem; 
+            text-transform: uppercase; letter-spacing: 2px; margin: 20px auto;
+            padding: 12px 20px; border: 1px solid var(--oro-caldo); 
+            display: inline-block; border-radius: 50px; background: rgba(255,255,255,0.5);
+            transition: 0.3s;
+        }
+        .timeline-details summary:hover { background: var(--oro-caldo); color: white; }
         .timeline-wrapper { 
             display: flex; overflow-x: auto; padding: 20px 0; gap: 40px; 
             scrollbar-width: none; -ms-overflow-style: none; justify-content: flex-start;
@@ -143,7 +154,7 @@
 
         /* SLIDER */
         .slider-wrapper { overflow: hidden; padding: 20px 0; width: 100%; cursor: grab; touch-action: pan-y; }
-        .slider-track { display: flex; width: max-content; }
+        .slider-track { display: flex; width: max-content; will-change: transform; }
         .slider-track img { width: 220px; height: 320px; object-fit: cover; margin: 0 10px; border: 10px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.08); pointer-events: none; }
 
         /* FAQ */
@@ -159,7 +170,15 @@
         .input-wedding { width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright); font-family: 'Montserrat'; font-size: 0.95rem; }
         .btn-lux { background: var(--salvia-deep); color: white; padding: 20px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: 600; font-size: 0.9rem; position: relative; overflow: hidden; transition: 0.5s; }
 
-        /* STORIA */
+        /* STORIA - MIGLIORATO PULSANTE */
+        .storia-summary { 
+            list-style: none; text-align: center; font-style: italic; margin-bottom: 20px; 
+            color: var(--salvia-deep); text-transform: UPPERCASE; outline: none; 
+            font-weight: 600; letter-spacing: 1px; padding: 15px; border: 1px dashed var(--oro-caldo);
+            background: white; transition: 0.3s;
+        }
+        .storia-summary:hover { background: var(--arancio-seta); }
+
         .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 1.9; color: #3d3d3d; }
         .storia-content p:first-of-type::first-letter { font-family: 'Great Vibes'; font-size: 3.5rem; float: left; margin-right: 12px; color: var(--oro-caldo); line-height: 1; }
         .storia-decor { text-align: center; font-size: 2.5rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.6; }
@@ -172,6 +191,7 @@
             .hero-banner h1 { font-size: 2.8rem; }
             h2 { font-size: 2rem; }
             section { padding: 30px 15px; }
+            .hero { min-height: 60vh; }
         }
     </style>
 </head>
@@ -186,8 +206,8 @@
 
 <div id="busta-container">
     <div class="envelope-wrapper">
-        <img src="busta.png" class="envelope-img">
-        <img src="bollino.png" class="wax-img" onclick="openWedding()">
+        <img src="busta.png" class="envelope-img" alt="Busta">
+        <img src="bollino.png" class="wax-img" onclick="openWedding()" alt="Sigillo">
     </div>
     <div class="hint-text">Tocca il sigillo per aprire il nostro invito</div>
 </div>
@@ -268,16 +288,16 @@
         </div>
         <div class="slider-wrapper">
             <div class="slider-track" id="slider-track">
-                <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
-                <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
-                <img src="h.jpg"> <img src="i.jpg"> <img src="l.jpg"> <img src="m.jpg">
-                <img src="n.jpg"> <img src="o.jpg"> <img src="p.jpg"> <img src="q.jpg">
-                <img src="r.jpg"> <img src="v.jpg"> <img src="u.jpg"> <img src="s.jpg">
-                <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
-                <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
-                <img src="h.jpg"> <img src="i.jpg"> <img src="l.jpg"> <img src="m.jpg">
-                <img src="n.jpg"> <img src="o.jpg"> <img src="p.jpg"> <img src="q.jpg">
-                <img src="r.jpg"> <img src="v.jpg"> <img src="u.jpg"> <img src="s.jpg">
+                <img src="b.jpg" loading="lazy"> <img src="bb.jpg" loading="lazy"> <img src="c.jpg" loading="lazy"> <img src="d.jpg" loading="lazy">
+                <img src="e.jpg" loading="lazy"> <img src="f.jpg" loading="lazy"> <img src="ff.jpg" loading="lazy"> <img src="g.jpg" loading="lazy">
+                <img src="h.jpg" loading="lazy"> <img src="i.jpg" loading="lazy"> <img src="l.jpg" loading="lazy"> <img src="m.jpg" loading="lazy">
+                <img src="n.jpg" loading="lazy"> <img src="o.jpg" loading="lazy"> <img src="p.jpg" loading="lazy"> <img src="q.jpg" loading="lazy">
+                <img src="r.jpg" loading="lazy"> <img src="v.jpg" loading="lazy"> <img src="u.jpg" loading="lazy"> <img src="s.jpg" loading="lazy">
+                <img src="b.jpg" loading="lazy"> <img src="bb.jpg" loading="lazy"> <img src="c.jpg" loading="lazy"> <img src="d.jpg" loading="lazy">
+                <img src="e.jpg" loading="lazy"> <img src="f.jpg" loading="lazy"> <img src="ff.jpg" loading="lazy"> <img src="g.jpg" loading="lazy">
+                <img src="h.jpg" loading="lazy"> <img src="i.jpg" loading="lazy"> <img src="l.jpg" loading="lazy"> <img src="m.jpg" loading="lazy">
+                <img src="n.jpg" loading="lazy"> <img src="o.jpg" loading="lazy"> <img src="p.jpg" loading="lazy"> <img src="q.jpg" loading="lazy">
+                <img src="r.jpg" loading="lazy"> <img src="v.jpg" loading="lazy"> <img src="u.jpg" loading="lazy"> <img src="s.jpg" loading="lazy">
             </div>
         </div>
     </section>
@@ -290,7 +310,7 @@
                 <p style="font-size: 0.95rem; margin-bottom: 10px;">Il dono più grande che possiamo ricevere è la vostra presenza. </p>
              <p style="font-size: 0.95rem;">Se desiderate contribuire, sostenendoci nella realizzazione della nostra casetta, dove speriamo di potervi invitare al più presto, trovate qui sotto i dettagli dell'IBAN.</p>
                 <p style="font-size: 0.95rem;"> (Si, perchè più che una lista nozze, abbiamo un piano di ammortamento!)</p>
-                <p style="font-size: 0.95rem;">In casi estremi accettiamo anche buoni pasto! (in tempi di crisi, si impara ad essere creativi) 😂😂 </p>
+                <p style="font-size: 0.95rem;">In casi estremi accettiamo anche buoni pasto! (in tempi di crisi, tuto fa brodo! 😂) </p>
                 <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-caldo); margin-top: 25px; position: relative;">
                     <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-caldo); margin-bottom: 10px; text-transform: uppercase;">IBAN intestato a VINCENZI CHIARA e TRONCHIN GREGORIO</p>
                     <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600;">IT89X0585661960129571602715</p>
@@ -357,13 +377,13 @@
         <div class="container">
             <div class="storia-content">
                 <details style="cursor: pointer;">
-                    <summary style="list-style: none; text-align: center; font-style: italic; margin-bottom: 20px; color: #666; text-transform: UPPERCASE; outline: none;">
+                    <summary class="storia-summary">
                         E infine, per chi volesse sapere come siamo arrivati fino a qui, ecco a voi
-                        <div style="font-size: 1.2rem; margin-top: 10px;">▼</div>
+                        <div style="font-size: 1.2rem; margin-top: 10px;">SCOPRI LA NOSTRA STORIA ▼</div>
                     </summary>
                     <h2 style="text-align: center;">La nostra Storia</h2>
                     <div class="storia-decor">~ ❦ ~</div>
-                                          <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita...</p>
+                      <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita...</p>
                
                 <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita in un intrico di parentele che li legava come rami di un unico albero: Nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
                
@@ -391,8 +411,9 @@
                 <p> Questa è la loro storia, la storia di due persone che grazie a Dio si sono trovate, scelte e amate e che insieme, come hanno sempre fatto, sono pronte a scrivere un nuovo capitolo della loro vita.</p>
                 <p>Oggi, mentre si preparano a pronunciare il fatidico "sì”, Chiara e Gregorio guardano indietro con nostalgia e gratitudine. E mentre si stringono la mano con un sorriso che dice più di mille parole, sentono ancora il battito accelerato del cuore al pensiero che il disegno che il Signore ha creato per loro è stato perfetto, unendoli sin dall’inizio dei tempi. Dio in questo loro percorso è stato ed è tuttora fondamentale, come se fosse il tessuto prezioso che tramite il filo dell’amore, ha dato vita alla loro storia in un ricamo meravigliosamente perfetto, come solo ed esclusivamente lui avrebbe mai potuto fare. E’ stato la loro stella polare, li ha guidati come un faro verso la luce della propria vocazione.</p>
                 <p>Vocazione che oggi, porta con sé un nome ed un cognome:</p>
-                    <p>Chiara Vincenzi per lui e Gregorio Tronchin per lei.</p>
-                    <div class="storia-decor">~ ❦ ~</div>
+                    <p>Chiara Vincenzi per lui e Gregorio Tronchin per lei.</p>        
+                                        
+   <div class="storia-decor">~ ❦ ~</div>
                 </details>
             </div>
         </div>
@@ -476,22 +497,44 @@
         });
     });
 
-    // Slider Logic
-    let isDragging = false, startX, currentX = 0;
+    // Slider Logic - MIGLIORATA INTERATTIVITÀ
+    let isDragging = false, startX, currentX = 0, lastX = 0;
     const sliderWrapper = document.querySelector('.slider-wrapper');
+    const sliderTrack = document.getElementById('slider-track');
+
     function autoScroll() {
         if (!isDragging) {
             currentX -= 0.8;
-            if (Math.abs(currentX) >= document.getElementById('slider-track').scrollWidth / 2) currentX = 0;
-            document.getElementById('slider-track').style.transform = `translateX(${currentX}px)`;
+            if (Math.abs(currentX) >= sliderTrack.scrollWidth / 2) currentX = 0;
+            sliderTrack.style.transform = `translateX(${currentX}px)`;
         }
         requestAnimationFrame(autoScroll);
     }
-    sliderWrapper.addEventListener('mousedown', (e) => { isDragging = true; startX = e.pageX - currentX; });
-    sliderWrapper.addEventListener('touchstart', (e) => { isDragging = true; startX = e.touches[0].pageX - currentX; });
-    window.addEventListener('mousemove', (e) => { if (!isDragging) return; currentX = e.pageX - startX; document.getElementById('slider-track').style.transform = `translateX(${currentX}px)`; });
-    window.addEventListener('mouseup', () => isDragging = false);
-    window.addEventListener('touchend', () => isDragging = false);
+
+    sliderWrapper.addEventListener('mousedown', (e) => { 
+        isDragging = true; 
+        startX = e.pageX - currentX; 
+        sliderWrapper.style.cursor = 'grabbing';
+    });
+    sliderWrapper.addEventListener('touchstart', (e) => { 
+        isDragging = true; 
+        startX = e.touches[0].pageX - currentX; 
+    });
+
+    window.addEventListener('mousemove', (e) => { 
+        if (!isDragging) return; 
+        currentX = e.pageX - startX; 
+        sliderTrack.style.transform = `translateX(${currentX}px)`; 
+    });
+    window.addEventListener('touchmove', (e) => { 
+        if (!isDragging) return; 
+        currentX = e.touches[0].pageX - startX; 
+        sliderTrack.style.transform = `translateX(${currentX}px)`; 
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; sliderWrapper.style.cursor = 'grab'; });
+    window.addEventListener('touchend', () => { isDragging = false; });
+    
     autoScroll();
 
     window.addEventListener('scroll', () => {
@@ -500,7 +543,6 @@
         if(parallax) parallax.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
     });
 
-    /* NUOVO SCRIPT PER INVIO SENZA CAMBIARE PAGINA */
     const rsvpForm = document.getElementById('rsvp-form');
     rsvpForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -508,13 +550,11 @@
         const originalText = btn.innerText;
         btn.innerText = "INVIO IN CORSO...";
         btn.disabled = true;
-
         const formData = new FormData(rsvpForm);
-
         fetch(rsvpForm.action, {
             method: 'POST',
             body: formData,
-            mode: 'no-cors' // Necessario per SheetMonkey
+            mode: 'no-cors'
         }).then(() => {
             alert('Grazie di cuore! La tua conferma è stata registrata correttamente.');
             btn.innerText = "CONFERMA INVIATA!";
@@ -528,5 +568,4 @@
 </script>
 </body>
 </html>
-
-                 
+                                        
